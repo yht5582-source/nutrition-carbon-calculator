@@ -31,6 +31,14 @@ main{padding:23px 0 32px}.workspace{display:grid;grid-template-columns:minmax(0,
 input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;border-radius:7px;padding:7px 8px;font-size:14px;min-height:39px}input::placeholder{color:#697264}input[aria-invalid=true]{background:#fff2eb;border-color:#9f412a}
 .group{overflow:hidden}.group-head{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:12px 16px;background:#fcfdf7;border-bottom:1px solid var(--line)}.group-head h2{display:flex;gap:8px;align-items:center}.dot{width:9px;height:9px;flex:none;border-radius:50%;display:inline-block;background:var(--tone,var(--leaf))}.group-sum{font-size:13px;font-weight:750;white-space:nowrap}.columns,.entry{display:grid;grid-template-columns:minmax(128px,1.4fr) minmax(70px,.72fr) minmax(90px,.9fr) minmax(89px,.6fr);gap:10px;align-items:start;padding:9px 16px}.columns{background:#fff;color:var(--muted);font-weight:700;font-size:11px;border-bottom:1px solid #eaede2}.entry{border-bottom:1px solid #edf0e4}.entry h3{font-size:13px;margin-top:2px;overflow-wrap:anywhere}.entry small{display:block;font-weight:500;color:var(--muted);font-size:11px}.entry output,.columns span:last-child{text-align:right}.entry output{padding-top:7px;font-size:13px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.entry .inline-label{display:none}.entry .custom-input{margin-bottom:4px;min-height:32px;font-size:13px}.entry .row-actions{grid-column:1/-1;display:flex;gap:10px;align-items:center}.remove{font-size:12px;background:none;border:0;color:#89412f;text-decoration:underline;padding:0;margin-left:auto}.group-actions{padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.group-actions .button{padding:5px 9px;min-height:32px}.entry .warning,.warning{color:#9a3726}
 .summary{position:sticky;top:14px;overflow:hidden}.headline{background:#e9eedc;padding:18px 19px;border-bottom:1px solid var(--line)}.metric{display:block;line-height:1.1;font-size:clamp(33px,5vw,51px);font-weight:800;font-variant-numeric:tabular-nums;margin-top:10px;letter-spacing:-.04em;overflow-wrap:anywhere}.headline small{font-size:13px;color:var(--muted)}.totals{padding:15px 19px}.totals h3{font-size:14px}.total-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:11px;font-size:13px}.total-row strong{text-align:right;overflow-wrap:anywhere}.bar{display:flex;height:10px;border-radius:10px;overflow:hidden;background:#eceee6;margin:9px 0}.bar span{background:var(--tone)}.legend{display:grid;gap:7px;font-size:13px}.legend div{display:flex;align-items:center;gap:7px}.legend b{margin-left:auto;text-align:right}.totals .note{margin-top:10px}.totals button{margin-top:12px;width:100%}.quick-link{display:block;text-align:center;margin-top:9px;font-size:13px;font-weight:750}.analysis{margin-top:18px;padding:17px 19px;scroll-margin-top:15px}.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.analysis-grid>section+section{border-left:1px solid var(--line);padding-left:20px}.scenario-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr);gap:9px;margin-top:9px}.analysis .result{background:#edf1e3;margin-top:9px;padding:8px 10px;border-radius:7px;font-size:13px;font-weight:700}.method{margin-top:18px;padding:15px 18px}.method summary{font-weight:750;cursor:pointer}.method p,.method li{font-size:13px;color:var(--muted)}.method p{margin-top:8px}.method ul{padding-left:21px;margin:8px 0}[hidden]{display:none!important}
+.steps{list-style:none;display:flex;gap:6px;margin:0 0 18px;padding:0}.steps li{flex:1;min-width:0}.steps a{display:flex;align-items:center;gap:8px;height:100%;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--white);text-decoration:none;font-weight:750;font-size:14px;color:var(--ink)}.steps a:hover{background:#edf2e5}.steps b,.step-no{display:inline-grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--deep);color:var(--lime);font-size:13px}.steps span{font-weight:500;font-size:12px;color:var(--muted);margin-left:auto}
+.step-title{display:flex;align-items:center;gap:9px;font-size:20px;margin:0 0 4px}.step-lead{font-size:13px;color:var(--muted);margin:0 0 12px}.step{scroll-margin-top:12px}.step+.step{margin-top:26px}
+.level{margin-top:9px;padding:9px 11px;border-radius:7px;font-size:13px;font-weight:700;background:#edf1e3}.level[data-level=lower]{background:#e3f0dc;color:#24502a}.level[data-level=within]{background:#eef0e2;color:#3d4a2e}.level[data-level=higher]{background:#fbe9dc;color:#7a3618}
+.peer-box{border:1px solid var(--line);border-radius:10px;padding:13px;margin-top:12px}.peer-box h3{font-size:15px}.peer-table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}.peer-table th{text-align:left;font-size:11px;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--line)}.peer-table td{padding:5px 6px;border-bottom:1px solid #edf0e4;vertical-align:middle}.peer-table input{min-height:34px;font-size:13px}.peer-table .tag{font-size:11px;font-weight:750;white-space:nowrap}.peer-table .tag.on{color:var(--leaf)}.peer-table .tag.off{color:var(--muted)}
+.bench{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;margin-top:9px}.bench div{background:#f3f5ec;border-radius:7px;padding:8px 10px;font-size:12px}.bench strong{display:block;font-size:15px;color:var(--leaf)}
+.advice-list{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}.advice-list>li{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:#fff}.advice-list h3{font-size:14px;display:flex;gap:8px;align-items:center}.advice-list h3 b{margin-left:auto;font-size:13px;white-space:nowrap}.advice-list ul{margin:6px 0 0;padding-left:20px;font-size:13px;color:var(--muted)}.advice-list .need{font-size:12px;font-weight:700;color:var(--amber);margin-top:5px}
+.summary-peer{border-top:1px solid var(--line);margin-top:12px;padding-top:9px}.summary-peer p{font-size:13px;font-weight:700;margin-top:4px}
+@media(max-width:620px){.steps{flex-direction:column}.peer-table thead{display:none}.peer-table tr{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px 0;border-bottom:1px solid var(--line)}.peer-table td{border:0;padding:2px}.peer-table td:first-child{grid-column:1/-1}}
 @media(max-width:1040px){.shell{width:calc(100% - 36px)}.workspace{grid-template-columns:minmax(0,1fr) minmax(235px,275px);gap:12px}.context{grid-template-columns:1fr 1fr}.columns,.entry{padding-inline:12px;gap:7px;grid-template-columns:minmax(100px,1.2fr) minmax(65px,.7fr) minmax(70px,.8fr) minmax(68px,.6fr)}}
 @media(max-width:740px){.workspace{display:flex;flex-direction:column}.workspace>*{width:100%}.summary{order:-1;position:static}.hero{display:block;padding:26px 0}.buttons{margin-top:15px}.shell{width:calc(100% - 26px)}.analysis-grid{grid-template-columns:1fr}.analysis-grid>section+section{border-left:0;border-top:1px solid var(--line);padding:12px 0 0}}
 @media(max-width:475px){.columns{display:none}.entry{grid-template-columns:1fr 1fr}.entry .row-name,.entry output{grid-column:1/-1}.entry output{text-align:left;padding-top:0}.entry .inline-label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}.top .shell{min-height:50px}.top a{font-size:11px}.context input{font-size:13px}}
@@ -42,6 +50,10 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <div class="shell hero"><div><h1>營養科供膳碳足跡</h1><p>以實際供餐份數為分母，找出一餐的主要排放來源。</p></div><div class="buttons"><button class="button primary" type="button" id="demo">載入單月示範</button><button class="button ghost" type="button" id="clear">清空資料</button></div></div>
 </header>
 <main class="shell">
+<ol class="steps" aria-label="使用流程"><li><a href="#calc"><b>1</b>計算碳排量</a></li><li><a href="#compare"><b>2</b>比較同規模機構</a></li><li><a href="#advice"><b>3</b>減排建議</a></li></ol>
+<section class="step" id="calc" aria-labelledby="calc-title">
+<h2 class="step-title" id="calc-title"><span class="step-no">1</span>計算碳排量</h2>
+<p class="step-lead">填入盤查期間、供餐份數，以及各來源的活動量與排放係數。右側即時顯示每餐與同期排放。</p>
 <div class="workspace">
 <section class="forms" aria-label="供膳資料">
 <div class="card meta">
@@ -60,19 +72,6 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <p id="month-help">請填入所選期間的活動量。若要看各月排放，請分月填報與匯出。</p>
 <p id="context-message" role="status"></p>
 </div>
-<section class="card meta" aria-labelledby="scale-title">
-<div class="scale-head"><h2 id="scale-title">院區規模與營養科人力</h2><button class="button" id="site-scale" type="button">帶入北港附醫規模</button></div>
-<p>按盤查期間的床數、人力與實際供餐量換算服務規模。人數可填區間，固定人數時兩欄填相同值。</p>
-<div class="context">
-<label><span class="caption">院區住院床數</span><input id="inpatient-beds" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 481"></label>
-<label><span class="caption">營養師人數下限</span><input id="staff-low" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 6"></label>
-<label><span class="caption">營養師人數上限</span><input id="staff-high" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 7"></label>
-<label id="inpatient-days-field"><span class="caption">同期住院人日（選填）</span><input id="inpatient-days" type="number" min="1" step="1" inputmode="numeric"></label>
-</div>
-<dl class="scale-results" id="scale-results" hidden></dl>
-<p id="scale-status"></p>
-<p>人力指標以全科營養師人數換算，供比較服務量規模。碳排仍以實際活動量與供餐份數計算。</p>
-</section>
 <div id="groups" class="forms"></div>
 </section>
 <aside class="card summary" aria-label="排放結果">
@@ -87,13 +86,67 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <h3>排放來源</h3><div class="bar" id="bar" aria-hidden="true"></div><div id="legend" class="legend"></div>
 <p class="note" id="status"></p><p class="note" id="coverage"></p>
 <button class="button" id="export" type="button" disabled>下載試算明細（CSV）</button>
-<a class="quick-link" href="#annual">查看年度彙總 ↓</a>
-<a class="quick-link" href="#scenario">查看減碳情境 ↓</a>
+<div class="summary-peer"><h3>步驟 2 判讀</h3><p id="summary-peer">—</p></div>
+<a class="quick-link" href="#compare">② 比較同規模機構 ↓</a>
+<a class="quick-link" href="#advice">③ 減排建議 ↓</a>
 </div>
 </aside>
 </div>
+</section>
+
+<section class="step" id="compare" aria-labelledby="compare-title">
+<h2 class="step-title" id="compare-title"><span class="step-no">2</span>比較同規模機構</h2>
+<p class="step-lead">先填院區規模，再對照同規模機構與公開文獻。只有計算口徑相近的數值才適合直接比較。</p>
+<section class="card meta" aria-labelledby="scale-title">
+<div class="scale-head"><h3 id="scale-title">本院規模與營養科人力</h3><button class="button" id="site-scale" type="button">帶入北港附醫規模</button></div>
+<p>按盤查期間的床數、人力與實際供餐量換算服務規模。人數可填區間，固定人數時兩欄填相同值。</p>
+<div class="context">
+<label><span class="caption">院區住院床數</span><input id="inpatient-beds" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 481"></label>
+<label><span class="caption">營養師人數下限</span><input id="staff-low" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 6"></label>
+<label><span class="caption">營養師人數上限</span><input id="staff-high" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 7"></label>
+<label id="inpatient-days-field"><span class="caption">同期住院人日</span><input id="inpatient-days" type="number" min="1" step="1" inputmode="numeric" placeholder="與盤查期間相同"></label>
+</div>
+<dl class="scale-results" id="scale-results" hidden></dl>
+<p id="scale-status"></p>
+
+<div class="peer-box" aria-labelledby="peer-title">
+<h3 id="peer-title">A. 同規模機構對照（每餐總排放）</h3>
+<p class="note">填入其他醫院營養科的每餐排放與住院床數。床數落在本院 ±<span id="peer-band">30</span>% 內者視為同規模，取其範圍作為比較基準。請先確認對方的供膳範圍及納入項目（食材、能源、包材、運輸、廚餘）與本院相近。</p>
+<table class="peer-table"><thead><tr><th>機構名稱</th><th>住院床數</th><th>每餐排放（kg CO₂e）</th><th>規模</th><th></th></tr></thead><tbody id="peer-rows"></tbody></table>
+<div class="group-actions" style="padding-inline:0"><button class="button" type="button" id="add-peer">＋ 新增對照機構</button></div>
+<p class="level" id="peer-result" role="status"></p>
+</div>
+
+<div class="peer-box" aria-labelledby="lit-title">
+<h3 id="lit-title">B. 公開文獻參考（僅食材，住院病人餐）</h3>
+<p class="note">文獻只計食材從生產到出廠的排放，不含廚房能源、包材、運輸及廚餘處理，因此只拿本院「食材」小計對照。文獻醫院規模與本院不同，僅作量級參考。</p>
+<div class="bench" id="lit-bench"></div>
+<p class="level" id="lit-result" role="status"></p>
+</div>
+</section>
+</section>
+
+<section class="step" id="advice" aria-labelledby="advice-title">
+<h2 class="step-title" id="advice-title"><span class="step-no">3</span>減排建議</h2>
+<p class="step-lead">依步驟 1 的排放占比由高到低排序，並帶入步驟 2 的差距。所有調整須先符合病人膳食處方、營養需求、感控及食安規範。</p>
+<div class="card analysis" style="margin-top:0">
+<p class="level" id="gap" role="status"></p>
+<ol class="advice-list" id="advice-list"></ol>
+<div class="peer-box">
+<h3>單項減量試算</h3>
+<p class="note" id="action">有排放數據後，可選擇來源試算單項減量。</p>
+<div class="scenario-controls">
+<label><span class="caption">排放來源</span><select id="scenario-category"></select></label>
+<label><span class="caption">假設下降</span><select id="scenario-percent"><option value="5">5%</option><option value="10" selected>10%</option><option value="20">20%</option><option value="30">30%</option><option value="50">50%</option></select></label>
+</div>
+<p class="result" id="scenario-result"></p>
+<p class="note">以供餐量、其餘排放及照護要求維持相同為前提。</p>
+</div>
+</div>
+</section>
+
 <section class="card analysis" id="annual" aria-labelledby="annual-title">
-<div class="annual-head"><h2 id="annual-title">年度排放彙總</h2><button class="button" id="annual-export" type="button" disabled>下載年度明細（CSV）</button></div>
+<div class="annual-head"><h2 id="annual-title">附：年度排放彙總</h2><button class="button" id="annual-export" type="button" disabled>下載年度明細（CSV）</button></div>
 <p class="note">每月填入同一供膳範圍的已計入排放量（公斤 CO₂e）。可直接填寫，或由完整單月試算帶入。空白為尚未填報。</p>
 <div class="scenario-controls">
 <label><span class="caption">彙總年度（西元）</span><input id="annual-year" type="number" min="1" max="9999" step="1" inputmode="numeric"></label>
@@ -102,28 +155,6 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <div class="annual-grid" id="annual-grid"></div>
 <div class="annual-total"><strong id="annual-total" aria-live="polite">—</strong><span id="annual-count"></span></div>
 <p class="note" id="annual-storage" role="status"></p>
-</section>
-<section class="card analysis" id="scenario" aria-label="比較及減量試算">
-<div class="analysis-grid">
-<section>
-<h2>減碳情境</h2>
-<p class="note" id="action">有排放數據後，可選擇來源試算單項減量。</p>
-<div class="scenario-controls">
-<label><span class="caption">排放來源</span><select id="scenario-category"></select></label>
-<label><span class="caption">假設下降</span><select id="scenario-percent"><option value="5">5%</option><option value="10" selected>10%</option><option value="20">20%</option><option value="30">30%</option></select></label>
-</div>
-<p class="result" id="scenario-result"></p>
-<p class="note">以供餐量、其餘排放及照護要求維持相同為前提。</p>
-</section>
-<section>
-<h2>與同口徑基準比較</h2>
-<p class="note">可使用上期或其他供膳單位的數值。請先核對供餐對象、餐別、份量與納入的生命週期範圍。</p>
-<div class="scenario-controls">
-<label><span class="caption">參考值（公斤 CO₂e／餐）</span><input id="reference" type="number" min="0" step="any" inputmode="decimal" placeholder="填已核對口徑的數值"></label>
-</div>
-<p class="result" id="comparison-result"></p>
-</section>
-</div>
 </section>
 <details class="card method" id="method">
 <summary>計算方法、係數與資料範圍</summary>
@@ -135,7 +166,10 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <li><a href="https://www.iso.org/standard/71206.html" target="_blank" rel="noopener noreferrer">ISO 14067 產品碳足跡量化指引</a></li>
 <li><a href="https://data.moenv.gov.tw/dataset/detail/CFP_P_02" target="_blank" rel="noopener noreferrer">環境部碳足跡排放係數資料集</a></li>
 <li><a href="https://www.moeaea.gov.tw/ECW/PDA.aspx?kind=1&amp;news_id=34473" target="_blank" rel="noopener noreferrer">經濟部能源署 2025 年公用售電業電力排碳係數</a></li>
+<li><a href="https://doi.org/10.3390/dietetics4030029" target="_blank" rel="noopener noreferrer">Lalande A, et al. Dietetics 2025;4(3):29</a>：加拿大三級醫院住院餐，供餐食材平均 3.75 kg CO₂e／病人／日（Q1 1.93、Q3 5.10，不含全日禁食），一般飲食 4.82；係數以北美 cradle-to-gate 食材資料為主。</li>
+<li><a href="https://doi.org/10.1177/1355819614553017" target="_blank" rel="noopener noreferrer">Vidal R, et al. J Health Serv Res Policy 2015;20:39–44</a>：西班牙醫院一般飲食菜單 5.08 kg CO₂e／日。</li>
 </ul>
+<p>步驟 2 的同規模判斷：對照機構床數落在本院床數 ±30% 內即列入，取其每餐排放的最低到最高作為參考區間；低於下限判為「較低」，高於上限判為「較高」。文獻對照以「食材小計 ÷ 同期住院人日」換算每病人日排放；未填住院人日時，以每餐食材排放 × 3 估算，並標示為估計值。步驟 3 會用步驟 2 的差距，換算回到參考上限所需的減量。</p>
 <p>結果涵蓋已填報項目，供院內管理試算。當次試算資料重新整理後會清空。年度月資料留存在目前瀏覽器，試算及年度明細均可下載 CSV 留存。</p>
 </details>
 </main>
@@ -143,16 +177,31 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 'use strict';
 const byId=id=>document.getElementById(id);
 const config=[
- {name:'食材',color:'#597843',hint:'依實際耗用量填報，食材與分攤後的用量須同口徑。',rows:[['米、麵與主食','kg'],['蔬菜與水果','kg'],['肉、魚與蛋','kg'],['豆類與豆製品','kg']],action:'優先把高排放食材拆成品項，核對實際耗用、報廢與供應商係數。在符合病人膳食處方及營養需求下，再評估等效菜單。'},
- {name:'廚房能源與用水',color:'#b17940',hint:'填入歸屬本次供膳範圍的能源及用水。',rows:[['外購電力','kWh'],['燃氣','kg'],['自來水','m³']],action:'分開檢視冷藏、蒸煮及洗滌用量，優先檢查長時間待機、設備維護與共用電力分攤。'},
- {name:'包材',color:'#8a7257',hint:'計入已使用的餐盒、袋材或其他包裝。',rows:[['餐盒或包材','個']],action:'依餐盒材質及重量核對採購和使用量，與感控及食安人員評估合規的包材減量方式。'},
- {name:'運輸與配送',color:'#587f85',hint:'係數須與所用的公里、噸公里或其他單位相符。',rows:[['配送車行駛距離','km']],action:'查核運送頻次、里程及載重，評估同路線合併與提高裝載率的可行性。'},
- {name:'廚餘處理',color:'#9b6553',hint:'依廚餘處理方式拆列活動量及處理係數。',rows:[['委外廚餘處理','kg']],action:'分別秤量備料、剩餘未供餐與餐後剩食，從需求預估、備餐批次及未使用食材報廢著手。'}
+ {name:'食材',color:'#597843',hint:'依實際耗用量填報，食材與分攤後的用量須同口徑。',rows:[['米、麵與主食','kg'],['蔬菜與水果','kg'],['肉、魚與蛋','kg'],['豆類與豆製品','kg']],action:'優先把高排放食材拆成品項，核對實際耗用、報廢與供應商係數。在符合病人膳食處方及營養需求下，再評估等效菜單。',
+  tips:['把「肉、魚與蛋」拆成牛、豬、禽、魚、蛋分列，找出單一最高排放品項。','普通飲食循環菜單中，以禽肉、魚、蛋或豆製品替換部分牛肉餐次；治療飲食須經營養師確認蛋白質與電解質仍符合處方。','提高蔬食或蛋奶素主菜的可選性，並追蹤選擇率與病人滿意度。','依實際攝食量調整份量標準，避免過量配置造成食材排放與剩食雙重增加。']},
+ {name:'廚房能源與用水',color:'#b17940',hint:'填入歸屬本次供膳範圍的能源及用水。',rows:[['外購電力','kWh'],['燃氣','kg'],['自來水','m³']],action:'分開檢視冷藏、蒸煮及洗滌用量，優先檢查長時間待機、設備維護與共用電力分攤。',
+  tips:['冷藏冷凍庫做門封、除霜與溫度設定檢查，避免長時間開門。','蒸煮設備依餐別排程開機，減少預熱與待機時間。','洗碗機滿載運轉並檢查熱水溫度設定與回收。','汰換時優先選擇高效率電器設備，評估燃氣設備改電的排放差異（以當年度電力係數試算）。']},
+ {name:'包材',color:'#8a7257',hint:'計入已使用的餐盒、袋材或其他包裝。',rows:[['餐盒或包材','個']],action:'依餐盒材質及重量核對採購和使用量，與感控及食安人員評估合規的包材減量方式。',
+  tips:['住院餐優先使用可重複清洗的餐具與餐盤，拋棄式品項限隔離病房等必要情境。','員工餐提供自備餐具或內用選項。','核對餐盒材質與重量，選用較輕或再生料比例較高的合規包材。']},
+ {name:'運輸與配送',color:'#587f85',hint:'係數須與所用的公里、噸公里或其他單位相符。',rows:[['配送車行駛距離','km']],action:'查核運送頻次、里程及載重，評估同路線合併與提高裝載率的可行性。',
+  tips:['合併同路線、同時段的食材進貨與院區間配送。','提高每趟裝載率，減少半載車次。','優先在地、當季食材，並請供應商提供里程或運輸係數。']},
+ {name:'廚餘處理',color:'#9b6553',hint:'依廚餘處理方式拆列活動量及處理係數。',rows:[['委外廚餘處理','kg']],action:'分別秤量備料、剩餘未供餐與餐後剩食，從需求預估、備餐批次及未使用食材報廢著手。',
+  tips:['分開秤量備料損耗、未出餐剩餘與病人餐後剩食，各自追蹤趨勢。','以前一日在院人數與飲食醫囑變更即時調整備餐量。','依剩食紀錄找出常剩菜色，調整口味、質地或份量。','與廚餘去化廠商確認處理方式（堆肥、厭氧消化、焚化），並使用相符係數。']}
 ];
+const literature=[
+ {label:'Lalande 2025 加拿大，全部住院飲食',low:1.93,high:5.10,mid:3.75,note:'Q1–Q3，平均 3.75'},
+ {label:'Lalande 2025 加拿大，一般飲食',mid:4.82,note:'平均'},
+ {label:'Vidal 2015 西班牙，一般飲食菜單',mid:5.08,note:'每日菜單'}
+];
+const litBand={low:1.93,high:5.10,unit:'kg CO₂e／病人日'};
+const peerBand=.3;
 const scaleIds=['inpatient-beds','staff-low','staff-high','inpatient-days'];
-const demoValues=[[[300,2],[1000,.5],[300,4],[200,1.5]],[[2000,.467],[160,3],[100,.2]],[[1000,.03]],[[300,.25]],[[150,.4]]];
+const demoValues=[[[4500,1.5],[6000,.6],[3000,6],[900,1.2]],[[12000,.467],[900,3],[600,.15]],[[6000,.03]],[[900,.25]],[[4500,.4]]];
+const demoPeers=[{name:'示範：區域醫院 A',beds:'420',value:'1.6'},{name:'示範：區域醫院 B',beds:'560',value:'1.2'},{name:'示範：醫學中心 C',beds:'1200',value:'1.9'}];
 const fmt=new Intl.NumberFormat('zh-TW',{maximumFractionDigits:3});
 const format=n=>n>0&&(n<.001||n>=1e12)?n.toExponential(2):fmt.format(n);
+const pctFmt=new Intl.NumberFormat('zh-TW',{maximumFractionDigits:1});
+const pct=n=>pctFmt.format(n)+'%';
 const blankRow=(name='',unit='',custom=false)=>({name,unit,custom,amount:'',factor:'',amountBad:false,factorBad:false});
 const makeGroups=()=>config.map(group=>group.rows.map(([name,unit])=>blankRow(name,unit)));
 let groups=makeGroups();
@@ -359,8 +408,8 @@ function calculate(){
   byId('month-note').textContent=month.note;
   byId('record-month').disabled=demo||!month.code||month.value===null;
   byId('status').textContent='已計入 '+count+' 項 · 未填 '+omitted+' 項'+(incomplete?' · 待補或無效 '+incomplete+' 項':'');
-  byId('coverage').textContent=!Number.isFinite(total)?'合計超出計算範圍。':dateError?'結束日期須晚於或等於開始日期。':!validMeals?'填入實際供餐份數後可換算每餐。':'結果涵蓋已計入項目。空白項目未納入。';
-  byId('context-message').textContent=[demo?'示範含假設係數，供操作練習。':'',message].filter(Boolean).join(' ');
+  byId('coverage').textContent=!Number.isFinite(total)?'合計超出計算範圍。':dateError?'結束日期須晚於或等於開始日期。':!validMeals?(mealsInput.value===''?'填入實際供餐份數後可換算每餐。':'供餐份數須為正整數。'):'結果涵蓋已計入項目。空白項目未納入。';
+  byId('context-message').textContent=[demo?'示範含假設係數及虛構對照機構，供操作練習；示範期間對照機構不會存入瀏覽器。':'',message].filter(Boolean).join(' ');
   byId('export').disabled=!validTotal||dateError;
   const legend=byId('legend'),bar=byId('bar');
   legend.replaceChildren();bar.replaceChildren();
@@ -371,14 +420,14 @@ function calculate(){
     const share=validTotal&&total>0?sums[i]/total*100:0;
     const value=counts[i]&&validTotal?format(sums[i])+' kg':'—';
     summaries[i].textContent=value;
-    entry.append(dot,element('span',group.name),element('b',value+(share>0?' · '+format(share)+'%':'')));
+    entry.append(dot,element('span',group.name),element('b',value+(share>0?' · '+pct(share):'')));
     legend.append(entry);
     const segment=element('span');
     segment.style.setProperty('--tone',group.color);
     segment.style.width=share+'%';
     bar.append(segment);
   });
-  last={rows,total,count,sums,validTotal,perMeal,meals:validMeals?meals:null,omitted,incomplete,month};
+  last={rows,total,count,counts,sums,validTotal,perMeal,meals:validMeals?meals:null,omitted,incomplete,month};
   last.scale=renderScale(last.meals,days);
   renderAnalysis();
 }
@@ -425,24 +474,138 @@ function renderScale(meals,days){
   byId('scale-status').textContent=notes.join(' ');
   return {beds,staffLow,staffHigh,staffOrder,inpatientDays,days,daily,perBed,perInpatientDay,staffing};
 }
+const peerKey='nutrition-carbon-peers-v1';
+let peers=[];
+try{const saved=JSON.parse(localStorage.getItem(peerKey)||'[]');if(Array.isArray(saved)) peers=saved.filter(p=>p&&typeof p==='object').map(p=>({name:String(p.name??''),beds:String(p.beds??''),value:String(p.value??'')}))}catch{}
+function savePeers(){if(demo) return;try{localStorage.setItem(peerKey,JSON.stringify(peers))}catch{}}
+const peerViews=[];
+function renderPeerRows(){
+  const body=byId('peer-rows');
+  body.replaceChildren();peerViews.length=0;
+  peers.forEach((peer,index)=>{
+    const tr=element('tr');
+    const cells=[['name','text','機構名稱'],['beds','number','住院床數'],['value','number','每餐排放']].map(([key,type,label])=>{
+      const input=element('input');
+      input.type=type;
+      if(type==='number'){input.min='0';input.step=key==='beds'?'1':'any';input.inputMode=key==='beds'?'numeric':'decimal'}
+      input.placeholder=label;input.value=peer[key];
+      input.setAttribute('aria-label','對照機構 '+(index+1)+' '+label);
+      input.addEventListener('input',()=>{peer[key]=input.value;savePeers();renderAnalysis()});
+      const td=element('td');td.append(input);tr.append(td);
+      return input;
+    });
+    const tag=element('span','—','tag'),tagCell=element('td');tagCell.append(tag);
+    const remove=element('button','移除','remove');remove.type='button';
+    remove.setAttribute('aria-label','移除對照機構 '+(index+1));
+    remove.addEventListener('click',()=>{peers.splice(index,1);savePeers();renderPeerRows();byId('add-peer').focus()});
+    const removeCell=element('td');removeCell.append(remove);
+    tr.append(tagCell,removeCell);
+    body.append(tr);
+    peerViews.push({peer,tag,bedsInput:cells[1],valueInput:cells[2]});
+  });
+  renderAnalysis();
+}
+function setLevel(node,level,text){node.dataset.level=level||'';node.textContent=text}
+function judge(own,low,high){return own<low?'lower':own>high?'higher':'within'}
+const levelText={lower:'低於',within:'落在',higher:'高於'};
+function comparePeers(){
+  const beds=last.scale?.beds??null;
+  const valid=[];
+  for(const view of peerViews){
+    const b=Number(view.peer.beds),v=Number(view.peer.value);
+    const okBeds=view.peer.beds!==''&&Number.isSafeInteger(b)&&b>0;
+    const okValue=view.peer.value!==''&&Number.isFinite(v)&&v>0;
+    view.bedsInput.setAttribute('aria-invalid',String(view.peer.beds!==''&&!okBeds));
+    view.valueInput.setAttribute('aria-invalid',String(view.peer.value!==''&&!okValue));
+    let similar=null;
+    if(okBeds&&beds) similar=Math.abs(b-beds)/beds<=peerBand;
+    view.tag.textContent=!okBeds||!okValue?'待補':similar===null?'未判斷':similar?'同規模':'規模不同';
+    view.tag.className='tag '+(similar?'on':'off');
+    if(okBeds&&okValue) valid.push({name:view.peer.name.trim()||'未命名機構',beds:b,value:v,similar});
+  }
+  const node=byId('peer-result');
+  if(!valid.length){setLevel(node,'','新增至少一家已核對口徑的機構，填入床數與每餐排放後顯示判讀。');return null}
+  if(!beds){setLevel(node,'','請在上方填入本院住院床數，才能判斷哪些機構屬於同規模。');return null}
+  const same=valid.filter(p=>p.similar);
+  if(!same.length){setLevel(node,'','目前沒有床數在 '+format(beds*(1-peerBand))+'–'+format(beds*(1+peerBand))+' 床之間的對照機構。請補充同規模機構。');return null}
+  if(last.perMeal===null){setLevel(node,'','已有 '+same.length+' 家同規模機構。完成步驟 1 的每餐排放後顯示判讀。');return null}
+  const values=same.map(p=>p.value),low=Math.min(...values),high=Math.max(...values);
+  const level=judge(last.perMeal,low,high);
+  const range=low===high?format(low):format(low)+'–'+format(high);
+  const partial=last.incomplete||last.omitted?'（步驟 1 仍有未填項目，屬初步判讀）':'';
+  setLevel(node,level,'本院每餐 '+format(last.perMeal)+' kg CO₂e，'+levelText[level]+' '+same.length+' 家同規模機構（'+same.map(p=>p.name).join('、')+'）的 '+range+' kg CO₂e／餐'+(level==='within'?'範圍內':level==='lower'?'下限':'上限')+'。'+partial);
+  return {source:'peer',level,own:last.perMeal,low,high,unit:'kg CO₂e／餐',basis:'total',count:same.length};
+}
+function compareLiterature(){
+  const bench=byId('lit-bench');
+  bench.replaceChildren();
+  for(const item of literature){
+    const box=element('div');
+    box.append(element('span',item.label),element('strong',(item.low?format(item.low)+'–'+format(item.high):format(item.mid))+' '+litBand.unit),element('span',item.note));
+    bench.append(box);
+  }
+  const node=byId('lit-result');
+  if(byId('boundary').selectedIndex!==0){setLevel(node,'','文獻數值為住院病人餐，供膳範圍選「住院病人餐」時才進行對照。');return null}
+  if(!last.validTotal||!last.counts[0]){setLevel(node,'','填入「食材」的活動量與係數後顯示。');return null}
+  const days=last.scale?.inpatientDays;
+  let own=null,how='';
+  if(days){own=last.sums[0]/days;how='食材小計 ÷ 同期住院人日'}
+  else if(last.meals){own=last.sums[0]/last.meals*3;how='估計值：每餐食材排放 × 3 餐'}
+  if(own===null){setLevel(node,'','填入同期住院人日（或供餐份數）後換算每病人日食材排放。');return null}
+  const level=judge(own,litBand.low,litBand.high);
+  setLevel(node,level,'本院食材 '+format(own)+' '+litBand.unit+'（'+how+'），'+levelText[level]+'文獻 Q1–Q3 '+format(litBand.low)+'–'+format(litBand.high)+(level==='within'?' 範圍內':level==='lower'?' 下限':' 上限')+'。');
+  return {source:'literature',level,own,low:litBand.low,high:litBand.high,unit:litBand.unit,basis:'food'};
+}
 function renderAnalysis(){
+  if(!last) return;
+  const peerOutcome=comparePeers(),litOutcome=compareLiterature();
+  const outcome=peerOutcome||litOutcome;
+  last.outcome=outcome;
+  const summary=byId('summary-peer');
+  summary.textContent=!outcome?'尚無法判讀，請到步驟 2 填入規模與對照資料。':
+    (outcome.source==='peer'?'每餐排放'+levelText[outcome.level]+'同規模機構範圍':'食材排放'+levelText[outcome.level]+'文獻範圍')+(outcome.level==='within'?'內':outcome.level==='lower'?'下限':'上限')+'。';
+  summary.style.color=outcome?.level==='higher'?'#7a3618':outcome?.level==='lower'?'#24502a':'';
+  // step 3: gap
+  const gap=byId('gap');
+  let need=null;
+  if(!last.validTotal) setLevel(gap,'','完成步驟 1 後，這裡會依排放來源排序提供建議。');
+  else if(!outcome) setLevel(gap,'','步驟 2 尚無法判讀，以下建議僅依排放占比排序。');
+  else if(outcome.level==='higher'){
+    const gapPct=(outcome.own-outcome.high)/outcome.own;
+    const base=outcome.basis==='food'?last.sums[0]:last.total;
+    need=base*gapPct;
+    setLevel(gap,'higher','步驟 2：'+(outcome.basis==='food'?'食材排放':'每餐排放')+'高於參考上限，約需降低 '+pct(gapPct*100)+'（同期約 '+format(need)+' 公斤 CO₂e）才能回到參考範圍。');
+  }else setLevel(gap,outcome.level,'步驟 2：'+(outcome.basis==='food'?'食材排放':'每餐排放')+levelText[outcome.level]+'參考'+(outcome.level==='within'?'範圍內':'下限')+'。可從占比最高的來源持續減量，並逐月追蹤。');
+  // ranked advice
+  const list=byId('advice-list');
+  list.replaceChildren();
+  if(last.validTotal&&last.total>0){
+    const order=config.map((group,i)=>({group,i,value:last.sums[i]})).filter(x=>last.counts[x.i]>0).sort((a,b)=>b.value-a.value);
+    for(const [rank,{group,i,value}] of order.entries()){
+      const li=element('li'),h=element('h3'),dot=element('i',undefined,'dot');
+      dot.style.setProperty('--tone',group.color);dot.setAttribute('aria-hidden','true');
+      h.append(dot,(rank+1)+'. '+group.name,element('b',format(value)+' kg · '+pct(value/last.total*100)));
+      const ul=element('ul');
+      for(const tip of group.tips) ul.append(element('li',tip));
+      li.append(h,ul);
+      if(need!==null){
+        const scope=outcome.basis==='food'&&i!==0?null:need/value*100;
+        if(scope!==null) li.append(element('p',scope>100?'本項全部歸零仍不足以補足差距，須搭配其他來源。':'若只靠本項，需下降約 '+pct(scope)+' 即可回到參考範圍。','need'));
+      }
+      list.append(li);
+    }
+  }
+  // scenario
   const selector=byId('scenario-category');
   if(scenarioAuto&&last.validTotal&&last.total>0) selector.value=String(last.sums.indexOf(Math.max(...last.sums)));
   const index=Number(selector.value),percent=Number(byId('scenario-percent').value);
   const savings=last.sums[index]*(percent/100);
   byId('action').textContent=last.validTotal?config[index].action:'有排放數據後，可選擇來源試算單項減量。';
+  let closes='';
+  if(need!==null&&last.validTotal&&!(outcome.basis==='food'&&index!==0)) closes=savings>=need?' 可回到參考範圍。':' 距參考範圍仍差 '+format(need-savings)+' 公斤。';
   byId('scenario-result').textContent=last.validTotal
-    ?'同期可少排 '+format(savings)+' 公斤 CO₂e'+(last.perMeal!==null?' · 每餐少排 '+format(savings/last.meals)+' 公斤 CO₂e':'')+'。'
+    ?'同期可少排 '+format(savings)+' 公斤 CO₂e'+(last.perMeal!==null?' · 每餐少排 '+format(savings/last.meals)+' 公斤 CO₂e':'')+'。'+closes
     :'填入有效的活動量與排放係數後顯示。';
-  const ref=byId('reference'),target=Number(ref.value);
-  const validReference=!ref.validity.badInput&&Number.isFinite(target)&&target>0;
-  ref.setAttribute('aria-invalid',String(ref.validity.badInput||(ref.value!==''&&!validReference)));
-  const validComparison=validReference&&last.perMeal!==null;
-  const percentDiff=validComparison?(last.perMeal-target)/target*100:null;
-  const gap=percentDiff===0?'與參考值相同。':(percentDiff>0?'高於':'低於')+'參考值'+(Number.isFinite(percentDiff)?'約 '+format(Math.abs(percentDiff))+'%':'')+'。';
-  byId('comparison-result').textContent=!validComparison
-    ?'填入有效的每餐試算及參考值後顯示。'
-    :last.incomplete||last.omitted?'初步對照（仍有未填或待補項目）。'+gap:gap;
 }
 for(const [i,group] of config.entries()){
   const option=element('option',group.name);
@@ -452,7 +615,11 @@ for(const [i,group] of config.entries()){
 byId('scenario-category').value='0';
 byId('scenario-category').addEventListener('change',()=>{scenarioAuto=false;renderAnalysis()});
 byId('scenario-percent').addEventListener('change',renderAnalysis);
-byId('reference').addEventListener('input',renderAnalysis);
+byId('add-peer').addEventListener('click',()=>{
+  peers.push({name:'',beds:'',value:''});savePeers();renderPeerRows();
+  byId('peer-rows').lastElementChild.querySelector('input').focus();
+});
+byId('peer-band').textContent=String(peerBand*100);
 byId('meals').addEventListener('input',calculate);
 function updateDates(){
   const start=byId('start').value,end=byId('end').value;
@@ -490,8 +657,8 @@ byId('apply-month').addEventListener('click',()=>{
   updateDates();
 });
 function hasInputs(){
-  return ['start','end','report-month','meals','reference',...scaleIds].some(id=>byId(id).value||byId(id).validity.badInput)||
-    groups.some(group=>group.some(row=>row.amount||row.factor||row.custom||row.amountBad||row.factorBad));
+  return ['start','end','report-month','meals',...scaleIds].some(id=>byId(id).value||byId(id).validity.badInput)||
+    peers.some(p=>p.name||p.beds||p.value)||groups.some(group=>group.some(row=>row.amount||row.factor||row.custom||row.amountBad||row.factorBad));
 }
 byId('demo').addEventListener('click',()=>{
   if(hasInputs()&&!confirm('載入示範會取代目前輸入，確定繼續？')) return;
@@ -500,22 +667,25 @@ byId('demo').addEventListener('click',()=>{
     [row.amount,row.factor]=demoValues[i][j].map(String);
   }));
   byId('boundary').selectedIndex=0;
-  for(const id of scaleIds) byId(id).value='';
+  const demoScale={'inpatient-beds':'481','staff-low':'6','staff-high':'7','inpatient-days':'11000'};
+  for(const id of scaleIds) byId(id).value=demoScale[id];
   byId('start').value='2025-06-01';byId('end').value='2025-06-30';
   byId('report-month').value='2025-06';byId('report-month').setAttribute('aria-invalid','false');
-  byId('meals').value='5000';byId('reference').value='';
+  byId('meals').value='30000';
   byId('scenario-percent').value='10';
+  peers=demoPeers.map(p=>({...p}));
   scenarioAuto=true;demo=true;electricityPreset=true;message='';
-  render();
+  render();renderPeerRows();
 });
 byId('clear').addEventListener('click',()=>{
   if(hasInputs()&&!confirm('確定清空目前輸入？')) return;
   groups=makeGroups();
-  for(const id of ['start','end','report-month','meals','reference',...scaleIds]) byId(id).value='';
+  for(const id of ['start','end','report-month','meals',...scaleIds]) byId(id).value='';
   byId('report-month').setAttribute('aria-invalid','false');
   byId('boundary').selectedIndex=0;byId('scenario-percent').value='10';byId('scenario-category').value='0';
+  peers=[];savePeers();
   scenarioAuto=true;demo=false;electricityPreset=false;message='';
-  render();
+  render();renderPeerRows();
 });
 byId('boundary').addEventListener('change',calculate);
 for(const id of scaleIds) byId(id).addEventListener('input',calculate);
@@ -657,6 +827,10 @@ byId('export').addEventListener('click',()=>{
     ['盤查日數',scale.days??''],['平均每日供餐',scale.daily??''],['每床每日病人供餐',scale.perBed??''],
     ['每住院人日供餐',scale.perInpatientDay??''],['每位營養師同期供餐換算下限',scale.staffing?.[0]??''],
     ['每位營養師同期供餐換算上限',scale.staffing?.[1]??''],
+    ['步驟 2 比較基準',last.outcome?(last.outcome.source==='peer'?'同規模機構 '+last.outcome.count+' 家（每餐總排放）':'文獻 Q1–Q3（食材，每病人日）'):'尚無法判讀'],
+    ['參考範圍',last.outcome?last.outcome.low+'–'+last.outcome.high+' '+last.outcome.unit:''],
+    ['本院比較值',last.outcome?last.outcome.own:''],
+    ['判讀',last.outcome?{lower:'低於參考範圍',within:'落在參考範圍內',higher:'高於參考範圍'}[last.outcome.level]:''],
     ['已計入項目',last.count],['未填項目',last.omitted],['待補或無效項目',last.incomplete],[],
     ['類別','項目','單位','活動量','係數（kg CO₂e／單位）','排放量（kg CO₂e）','狀態'],
     ...last.rows.map(row=>[config[row.i].name,row.name,row.unit,row.amount,row.factor,row.value??'',row.status])
@@ -677,6 +851,7 @@ function downloadCsv(lines,filename){
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 render();
+renderPeerRows();
 </script>
 </body>
 </html>
