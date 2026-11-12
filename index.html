@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="醫院營養科供膳碳足跡，試算每餐與同期總排放、比較減碳情境。">
+<title>營養科供膳碳足跡</title>
+<style>
+:root{color-scheme:light;--paper:#f6f5ed;--white:#fffef9;--ink:#263122;--muted:#566052;--line:#dcded0;--leaf:#3b5937;--deep:#243d2a;--lime:#e0ebad;--amber:#9d4d2d;--radius:15px;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.55}h1,h2,h3,p,dl,dd{margin:0}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}a{color:var(--leaf);text-underline-offset:3px}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #779a61;outline-offset:3px}
+.shell{width:min(1220px,calc(100% - 64px));margin:auto}.top{border-bottom:1px solid #536852;color:#eff3e6}.top .shell{min-height:58px;display:flex;justify-content:space-between;align-items:center;gap:18px}.top a{color:inherit;font-size:13px}.brand{display:flex;gap:10px;align-items:center;font-weight:750}.mark{display:grid;place-items:center;border:1px solid #a4b490;border-radius:50%;width:31px;height:31px;font-size:11px;font-weight:650}
+header{background:var(--deep);color:#f5f6ed;border-bottom:5px solid var(--lime)}.hero{padding:35px 0 40px;display:flex;justify-content:space-between;align-items:end;gap:22px}.hero h1{font-size:clamp(32px,5vw,58px);line-height:1.15;letter-spacing:.02em}.hero p{margin-top:12px;color:#dce8d8}.buttons{display:flex;gap:8px;flex-wrap:wrap}.button{border:1px solid #bec6b5;background:#fffef9;border-radius:7px;padding:8px 12px;font-size:13px;font-weight:750;min-height:36px}.button:hover{background:#edf2e5}.button.primary{background:var(--lime);border-color:var(--lime);color:#243521}.button.primary:hover{background:#f0f7cd}.button.ghost{background:transparent;border-color:#9dad95;color:#fff}.button.ghost:hover{background:#3c5940}
+main{padding:23px 0 32px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(285px,335px);gap:20px;align-items:start}.forms{display:grid;gap:12px}.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius)}.meta{padding:16px 18px}.meta h2,.group h2,.summary h2,.analysis h2{font-size:16px}.meta p,.group p,.note{font-size:13px;color:var(--muted);margin-top:4px}.context{display:grid;grid-template-columns:1.1fr 1fr 1fr .95fr;gap:9px;margin-top:12px}.context label,.scenario-controls label{font-size:12px;font-weight:750}.caption{display:block;margin-bottom:4px}
+.scale-head{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.scale-results{display:grid;gap:6px;margin-top:11px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
+.scale-results div{background:#eff2e7;border-radius:7px;padding:7px 9px;font-size:12px}
+.scale-results strong{display:block;font-size:15px;color:var(--leaf);overflow-wrap:anywhere}
+input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;border-radius:7px;padding:7px 8px;font-size:14px;min-height:39px}input::placeholder{color:#697264}input[aria-invalid=true]{background:#fff2eb;border-color:#9f412a}
+.group{overflow:hidden}.group-head{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:12px 16px;background:#fcfdf7;border-bottom:1px solid var(--line)}.group-head h2{display:flex;gap:8px;align-items:center}.dot{width:9px;height:9px;flex:none;border-radius:50%;display:inline-block;background:var(--tone,var(--leaf))}.group-sum{font-size:13px;font-weight:750;white-space:nowrap}.columns,.entry{display:grid;grid-template-columns:minmax(128px,1.4fr) minmax(70px,.72fr) minmax(90px,.9fr) minmax(89px,.6fr);gap:10px;align-items:start;padding:9px 16px}.columns{background:#fff;color:var(--muted);font-weight:700;font-size:11px;border-bottom:1px solid #eaede2}.entry{border-bottom:1px solid #edf0e4}.entry h3{font-size:13px;margin-top:2px;overflow-wrap:anywhere}.entry small{display:block;font-weight:500;color:var(--muted);font-size:11px}.entry output,.columns span:last-child{text-align:right}.entry output{padding-top:7px;font-size:13px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.entry .inline-label{display:none}.entry .custom-input{margin-bottom:4px;min-height:32px;font-size:13px}.entry .row-actions{grid-column:1/-1;display:flex;gap:10px;align-items:center}.remove{font-size:12px;background:none;border:0;color:#89412f;text-decoration:underline;padding:0;margin-left:auto}.group-actions{padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.group-actions .button{padding:5px 9px;min-height:32px}.entry .warning,.warning{color:#9a3726}
+.summary{position:sticky;top:14px;overflow:hidden}.headline{background:#e9eedc;padding:18px 19px;border-bottom:1px solid var(--line)}.metric{display:block;line-height:1.1;font-size:clamp(33px,5vw,51px);font-weight:800;font-variant-numeric:tabular-nums;margin-top:10px;letter-spacing:-.04em;overflow-wrap:anywhere}.headline small{font-size:13px;color:var(--muted)}.totals{padding:15px 19px}.totals h3{font-size:14px}.total-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:11px;font-size:13px}.total-row strong{text-align:right;overflow-wrap:anywhere}.bar{display:flex;height:10px;border-radius:10px;overflow:hidden;background:#eceee6;margin:9px 0}.bar span{background:var(--tone)}.legend{display:grid;gap:7px;font-size:13px}.legend div{display:flex;align-items:center;gap:7px}.legend b{margin-left:auto;text-align:right}.totals .note{margin-top:10px}.totals button{margin-top:12px;width:100%}.quick-link{display:block;text-align:center;margin-top:9px;font-size:13px;font-weight:750}.analysis{margin-top:18px;padding:17px 19px;scroll-margin-top:15px}.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.analysis-grid>section+section{border-left:1px solid var(--line);padding-left:20px}.scenario-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr);gap:9px;margin-top:9px}.analysis .result{background:#edf1e3;margin-top:9px;padding:8px 10px;border-radius:7px;font-size:13px;font-weight:700}.method{margin-top:18px;padding:15px 18px}.method summary{font-weight:750;cursor:pointer}.method p,.method li{font-size:13px;color:var(--muted)}.method p{margin-top:8px}.method ul{padding-left:21px;margin:8px 0}[hidden]{display:none!important}
+@media(max-width:1040px){.shell{width:calc(100% - 36px)}.workspace{grid-template-columns:minmax(0,1fr) minmax(235px,275px);gap:12px}.context{grid-template-columns:1fr 1fr}.columns,.entry{padding-inline:12px;gap:7px;grid-template-columns:minmax(100px,1.2fr) minmax(65px,.7fr) minmax(70px,.8fr) minmax(68px,.6fr)}}
+@media(max-width:740px){.workspace{display:flex;flex-direction:column}.workspace>*{width:100%}.summary{order:-1;position:static}.hero{display:block;padding:26px 0}.buttons{margin-top:15px}.shell{width:calc(100% - 26px)}.analysis-grid{grid-template-columns:1fr}.analysis-grid>section+section{border-left:0;border-top:1px solid var(--line);padding:12px 0 0}}
+@media(max-width:475px){.columns{display:none}.entry{grid-template-columns:1fr 1fr}.entry .row-name,.entry output{grid-column:1/-1}.entry output{text-align:left;padding-top:0}.entry .inline-label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}.top .shell{min-height:50px}.top a{font-size:11px}.context input{font-size:13px}}
+</style>
+</head>
+<body>
+<header>
+<div class="top"><div class="shell"><div class="brand"><span class="mark" aria-hidden="true">CO₂</span> 醫院營養科</div><a id="method-link" href="#method">計算方法與係數來源 ↓</a></div></div>
+<div class="shell hero"><div><h1>營養科供膳碳足跡</h1><p>以實際供餐份數為分母，找出一餐的主要排放來源。</p></div><div class="buttons"><button class="button primary" type="button" id="demo">載入單月示範</button><button class="button ghost" type="button" id="clear">清空資料</button></div></div>
+</header>
+<main class="shell">
+<div class="workspace">
+<section class="forms" aria-label="供膳資料">
+<div class="card meta">
+<h2>盤查期間與供餐量</h2>
+<p>請使用同期間、同一廚房或供膳範圍的活動量與實際供餐份數。</p>
+<div class="context">
+<label><span class="caption">供膳範圍</span><select id="boundary"><option>住院病人餐</option><option>員工餐</option><option>全院供膳</option><option>單一餐別或菜單</option><option>其他供膳範圍</option></select></label>
+<label><span class="caption">開始日期</span><input id="start" type="date"></label>
+<label><span class="caption">結束日期</span><input id="end" type="date"></label>
+<label><span class="caption">供餐份數</span><input id="meals" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 5000"></label>
+</div>
+<p id="context-message" role="status"></p>
+</div>
+<section class="card meta" aria-labelledby="scale-title">
+<div class="scale-head"><h2 id="scale-title">院區規模與營養科人力</h2><button class="button" id="site-scale" type="button">帶入北港附醫規模</button></div>
+<p>按盤查期間的床數、人力與實際供餐量換算服務規模。人數可填區間，固定人數時兩欄填相同值。</p>
+<div class="context">
+<label><span class="caption">院區住院床數</span><input id="inpatient-beds" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 481"></label>
+<label><span class="caption">營養師人數下限</span><input id="staff-low" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 6"></label>
+<label><span class="caption">營養師人數上限</span><input id="staff-high" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 7"></label>
+<label id="inpatient-days-field"><span class="caption">同期住院人日（選填）</span><input id="inpatient-days" type="number" min="1" step="1" inputmode="numeric"></label>
+</div>
+<dl class="scale-results" id="scale-results" hidden></dl>
+<p id="scale-status"></p>
+<p>人力指標以全科營養師人數換算，供比較服務量規模。碳排仍以實際活動量與供餐份數計算。</p>
+</section>
+<div id="groups" class="forms"></div>
+</section>
+<aside class="card summary" aria-label="排放結果">
+<div class="headline"><h2>每餐已計入排放</h2><strong id="per-meal" class="metric" aria-live="polite">—</strong><small>公斤 CO₂e／餐</small></div>
+<div class="totals">
+<div class="total-row"><span>同期已計入總量</span><strong id="period-total">—</strong></div>
+<h3>排放來源</h3><div class="bar" id="bar" aria-hidden="true"></div><div id="legend" class="legend"></div>
+<p class="note" id="status"></p><p class="note" id="coverage"></p>
+<button class="button" id="export" type="button" disabled>下載試算明細（CSV）</button>
+<a class="quick-link" href="#scenario">查看減碳情境 ↓</a>
+</div>
+</aside>
+</div>
+<section class="card analysis" id="scenario" aria-label="比較及減量試算">
+<div class="analysis-grid">
+<section>
+<h2>減碳情境</h2>
+<p class="note" id="action">有排放數據後，可選擇來源試算單項減量。</p>
+<div class="scenario-controls">
+<label><span class="caption">排放來源</span><select id="scenario-category"></select></label>
+<label><span class="caption">假設下降</span><select id="scenario-percent"><option value="5">5%</option><option value="10" selected>10%</option><option value="20">20%</option><option value="30">30%</option></select></label>
+</div>
+<p class="result" id="scenario-result"></p>
+<p class="note">以供餐量、其餘排放及照護要求維持相同為前提。</p>
+</section>
+<section>
+<h2>與同口徑基準比較</h2>
+<p class="note">可使用上期或其他供膳單位的數值。請先核對供餐對象、餐別、份量與納入的生命週期範圍。</p>
+<div class="scenario-controls">
+<label><span class="caption">參考值（公斤 CO₂e／餐）</span><input id="reference" type="number" min="0" step="any" inputmode="decimal" placeholder="填已核對口徑的數值"></label>
+</div>
+<p class="result" id="comparison-result"></p>
+</section>
+</div>
+</section>
+<details class="card method" id="method">
+<summary>計算方法、係數與資料範圍</summary>
+<p>同期排放為各項活動量乘以對應排放係數後的合計。每餐排放為同期排放除以實際供餐份數。所有係數的分母須與活動量單位一致。請留存來源、版本、地區及生命週期邊界。</p>
+<p>「一份實際供應的餐食」是本工具的計算單位。共用廚房、冷藏設備或洗滌的能源與用水，請依合理依據分攤。食材係數若已涵蓋配送或包裝，相關排放只計一次。廚餘列請使用處理階段的係數。</p>
+<p>可用台灣 2025 年公用售電業係數 0.467 kg CO₂e／kWh 試算廚房外購電力。正式生命週期盤查請選用與供電來源、年度及系統邊界相符的係數。</p>
+<ul>
+<li><a href="https://www.iso.org/standard/71206.html" target="_blank" rel="noopener noreferrer">ISO 14067 產品碳足跡量化指引</a></li>
+<li><a href="https://data.moenv.gov.tw/dataset/detail/CFP_P_02" target="_blank" rel="noopener noreferrer">環境部碳足跡排放係數資料集</a></li>
+<li><a href="https://www.moeaea.gov.tw/ECW/PDA.aspx?kind=1&amp;news_id=34473" target="_blank" rel="noopener noreferrer">經濟部能源署 2025 年公用售電業電力排碳係數</a></li>
+</ul>
+<p>結果涵蓋已填報項目，供院內管理試算。資料在瀏覽器內計算，重新整理後清空；可下載 CSV 留存。</p>
+</details>
+</main>
+<script>
+'use strict';
+const byId=id=>document.getElementById(id);
+const config=[
+ {name:'食材',color:'#597843',hint:'依實際耗用量填報，食材與分攤後的用量須同口徑。',rows:[['米、麵與主食','kg'],['蔬菜與水果','kg'],['肉、魚與蛋','kg'],['豆類與豆製品','kg']],action:'優先把高排放食材拆成品項，核對實際耗用、報廢與供應商係數。在符合病人膳食處方及營養需求下，再評估等效菜單。'},
+ {name:'廚房能源與用水',color:'#b17940',hint:'填入歸屬本次供膳範圍的能源及用水。',rows:[['外購電力','kWh'],['燃氣','kg'],['自來水','m³']],action:'分開檢視冷藏、蒸煮及洗滌用量，優先檢查長時間待機、設備維護與共用電力分攤。'},
+ {name:'包材',color:'#8a7257',hint:'計入已使用的餐盒、袋材或其他包裝。',rows:[['餐盒或包材','個']],action:'依餐盒材質及重量核對採購和使用量，與感控及食安人員評估合規的包材減量方式。'},
+ {name:'運輸與配送',color:'#587f85',hint:'係數須與所用的公里、噸公里或其他單位相符。',rows:[['配送車行駛距離','km']],action:'查核運送頻次、里程及載重，評估同路線合併與提高裝載率的可行性。'},
+ {name:'廚餘處理',color:'#9b6553',hint:'依廚餘處理方式拆列活動量及處理係數。',rows:[['委外廚餘處理','kg']],action:'分別秤量備料、剩餘未供餐與餐後剩食，從需求預估、備餐批次及未使用食材報廢著手。'}
+];
+const scaleIds=['inpatient-beds','staff-low','staff-high','inpatient-days'];
+const demoValues=[[[300,2],[1000,.5],[300,4],[200,1.5]],[[2000,.467],[160,3],[100,.2]],[[1000,.03]],[[300,.25]],[[150,.4]]];
+const fmt=new Intl.NumberFormat('zh-TW',{maximumFractionDigits:3});
+const format=n=>n>0&&(n<.001||n>=1e12)?n.toExponential(2):fmt.format(n);
+const blankRow=(name='',unit='',custom=false)=>({name,unit,custom,amount:'',factor:'',amountBad:false,factorBad:false});
+const makeGroups=()=>config.map(group=>group.rows.map(([name,unit])=>blankRow(name,unit)));
+let groups=makeGroups();
+let demo=false, electricityPreset=false, message='', scenarioAuto=true, rowViews=[], summaries=[], last;
+function element(tag,text,cls){
+  const e=document.createElement(tag);
+  if(text!==undefined) e.textContent=text;
+  if(cls) e.className=cls;
+  return e;
+}
+function numberField(row,key){
+  const field=element('input');
+  field.type='number';
+  field.min='0';
+  field.step='any';
+  field.inputMode='decimal';
+  field.placeholder='—';
+  field.value=row[key];
+  field.addEventListener('input',()=>{
+    row[key]=field.value;
+    row[key+'Bad']=field.validity.badInput;
+    if(row===groups[1][0]&&key==='factor'&&electricityPreset){electricityPreset=false;message=''}
+    calculate();
+  });
+  return field;
+}
+function createRow(row,group,i){
+  const entry=element('div',undefined,'entry');
+  const label=element('div',undefined,'row-name');
+  const amount=numberField(row,'amount'),factor=numberField(row,'factor');
+  const amountLabel=element('span',undefined,'inline-label'), factorLabel=element('span',undefined,'inline-label');
+  const updateLabels=()=>{
+    const name=row.name.trim()||'自訂項目',unit=row.unit.trim()||'單位';
+    amountLabel.textContent='活動量（'+unit+'）';
+    factorLabel.textContent='係數（kg CO₂e／'+unit+'）';
+    amount.setAttribute('aria-label',name+' '+amountLabel.textContent);
+    factor.setAttribute('aria-label',name+' '+factorLabel.textContent);
+  };
+  if(row.custom){
+    for(const [key,placeholder] of [['name','項目名稱'],['unit','活動量單位']]){
+      const input=element('input');
+      input.placeholder=placeholder;
+      input.value=row[key];
+      input.className='custom-input';
+      input.setAttribute('aria-label',placeholder);
+      input.addEventListener('input',()=>{row[key]=input.value;updateLabels();calculate()});
+      label.append(input);
+    }
+  }else{
+    const name=element('h3',row.name);
+    name.append(element('small',row.unit));
+    label.append(name);
+  }
+  const amountBox=element('div'),factorBox=element('div');
+  amountBox.append(amountLabel,amount);factorBox.append(factorLabel,factor);
+  const output=element('output');
+  entry.append(label,amountBox,factorBox,output);
+  if(row.custom){
+    const remove=element('button','移除項目','remove');
+    remove.type='button';
+    remove.addEventListener('click',()=>{
+      group.splice(group.indexOf(row),1);
+      render();
+      byId('add-'+i).focus();
+    });
+    const controls=element('div',undefined,'row-actions');
+    controls.append(remove);
+    entry.append(controls);
+  }
+  rowViews.push({row,i,amount,factor,output});
+  updateLabels();
+  return entry;
+}
+function render(){
+  rowViews=[];summaries=[];
+  const parent=byId('groups');
+  parent.replaceChildren();
+  config.forEach((group,i)=>{
+    const section=element('section',undefined,'card group');
+    const header=element('div',undefined,'group-head'),left=element('div');
+    const heading=element('h2'),dot=element('i',undefined,'dot');
+    dot.style.setProperty('--tone',group.color);
+    dot.setAttribute('aria-hidden','true');
+    heading.append(dot,group.name);
+    left.append(heading,element('p',group.hint));
+    const subtotal=element('output','—','group-sum');
+    summaries.push(subtotal);
+    header.append(left,subtotal);
+    const columns=element('div',undefined,'columns');
+    for(const text of ['排放項目','活動量','係數（kg CO₂e／單位）','排放量（kg）']) columns.append(element('span',text));
+    section.append(header,columns);
+    groups[i].forEach(row=>section.append(createRow(row,groups[i],i)));
+    const actions=element('div',undefined,'group-actions');
+    const add=element('button','＋ 新增項目','button');
+    add.id='add-'+i;
+    add.type='button';
+    add.setAttribute('aria-label','在'+group.name+'新增項目');
+    add.addEventListener('click',()=>{
+      groups[i].push(blankRow('','',true));
+      render();
+      byId('add-'+i).parentElement.previousElementSibling.querySelector('.custom-input').focus();
+    });
+    actions.append(add);
+    if(i===1){
+      const preset=element('button','套用 2025 年公用售電係數','button');
+      preset.type='button';
+      preset.id='electricity-preset';
+      preset.addEventListener('click',()=>{
+        if(!isPowerYear()){
+          message='請先填入 2025 年內的開始與結束日期，或自行輸入適用係數。';
+          calculate();
+          return;
+        }
+        groups[1][0].factor='0.467';
+        groups[1][0].factorBad=false;
+        electricityPreset=true;
+        message='已套用 2025 年公用售電係數 0.467 kg CO₂e／kWh。';
+        render();
+        byId('electricity-preset').focus();
+      });
+      actions.append(preset);
+    }
+    section.append(actions);
+    parent.append(section);
+  });
+  calculate();
+}
+function assess(row){
+  const amount=Number(row.amount),factor=Number(row.factor),value=amount*factor;
+  const invalidAmount=row.amountBad||!Number.isFinite(amount)||amount<0||!Number.isFinite(value);
+  const invalidFactor=row.factorBad||!Number.isFinite(factor)||factor<0||!Number.isFinite(value);
+  if(invalidAmount||invalidFactor) return {status:'數值無效',invalidAmount,invalidFactor};
+  if(row.amount==='') return {status:row.factor===''?'未填':'待填活動量'};
+  if(amount!==0&&row.factor==='') return {status:'待填係數'};
+  if(row.custom&&(!row.name.trim()||!row.unit.trim())) return {status:'待填名稱或單位'};
+  return {status:'已計入',value};
+}
+function isPowerYear(){
+  const start=byId('start').value,end=byId('end').value;
+  return start.startsWith('2025-')&&end.startsWith('2025-')&&start<=end;
+}
+function calculate(){
+  const sums=config.map(()=>0),counts=config.map(()=>0);
+  let omitted=0,incomplete=0;
+  const rows=rowViews.map(({row,i,amount,factor,output})=>{
+    const info=assess(row);
+    amount.setAttribute('aria-invalid',String(Boolean(info.invalidAmount)));
+    factor.setAttribute('aria-invalid',String(Boolean(info.invalidFactor)));
+    if(info.value!==undefined){
+      sums[i]+=info.value;
+      counts[i]++;
+      output.textContent=format(info.value)+' kg';
+    }else{
+      if(info.status==='未填') omitted++;
+      else incomplete++;
+      output.textContent=info.status==='未填'?'—':info.status;
+    }
+    output.classList.toggle('warning',info.value===undefined&&info.status!=='未填');
+    return {...row,...info,i};
+  });
+  const total=sums.reduce((a,b)=>a+b,0);
+  const count=counts.reduce((a,b)=>a+b,0);
+  const validTotal=count>0&&Number.isFinite(total);
+  const start=byId('start').value,end=byId('end').value;
+  const dateError=Boolean(start&&end&&start>end);
+  const mealsInput=byId('meals'),meals=Number(mealsInput.value);
+  const validMeals=!mealsInput.validity.badInput&&Number.isSafeInteger(meals)&&meals>0;
+  const perMeal=validTotal&&validMeals&&!dateError?total/meals:null;
+  byId('end').setAttribute('aria-invalid',String(dateError));
+  mealsInput.setAttribute('aria-invalid',String(mealsInput.validity.badInput||(mealsInput.value!==''&&!validMeals)));
+  byId('per-meal').textContent=perMeal===null?'—':format(perMeal);
+  byId('period-total').textContent=validTotal?format(total)+' 公斤 CO₂e':'—';
+  byId('status').textContent='已計入 '+count+' 項 · 未填 '+omitted+' 項'+(incomplete?' · 待補或無效 '+incomplete+' 項':'');
+  byId('coverage').textContent=!Number.isFinite(total)?'合計超出計算範圍。':dateError?'結束日期須晚於或等於開始日期。':!validMeals?'填入實際供餐份數後可換算每餐。':'結果涵蓋已計入項目。空白項目未納入。';
+  byId('context-message').textContent=[demo?'示範含假設係數，供操作練習。':'',message].filter(Boolean).join(' ');
+  byId('export').disabled=!validTotal||dateError;
+  const legend=byId('legend'),bar=byId('bar');
+  legend.replaceChildren();bar.replaceChildren();
+  config.forEach((group,i)=>{
+    const entry=element('div'),dot=element('i',undefined,'dot');
+    dot.style.setProperty('--tone',group.color);
+    dot.setAttribute('aria-hidden','true');
+    const share=validTotal&&total>0?sums[i]/total*100:0;
+    const value=counts[i]&&validTotal?format(sums[i])+' kg':'—';
+    summaries[i].textContent=value;
+    entry.append(dot,element('span',group.name),element('b',value+(share>0?' · '+format(share)+'%':'')));
+    legend.append(entry);
+    const segment=element('span');
+    segment.style.setProperty('--tone',group.color);
+    segment.style.width=share+'%';
+    bar.append(segment);
+  });
+  last={rows,total,count,sums,validTotal,perMeal,meals:validMeals?meals:null,omitted,incomplete};
+  last.scale=renderScale(last.meals,start,end);
+  renderAnalysis();
+}
+function renderScale(meals,start,end){
+  const raw={};
+  let invalid=false;
+  for(const id of scaleIds){
+    const input=byId(id), value=Number(input.value);
+    const bad=input.validity.badInput||(input.value!==''&&(!Number.isSafeInteger(value)||value<=0));
+    raw[id]=bad||!input.value?null:value;
+    input.setAttribute('aria-invalid',String(bad));
+    invalid=invalid||bad;
+  }
+  const beds=raw['inpatient-beds'], staffLow=raw['staff-low'], staffHigh=raw['staff-high'];
+  const patientMeals=byId('boundary').selectedIndex===0;
+  const inpatientDays=patientMeals?raw['inpatient-days']:null;
+  byId('inpatient-days-field').hidden=!patientMeals;
+  const elapsed=start&&end?Date.parse(end)-Date.parse(start):NaN;
+  const days=Number.isFinite(elapsed)&&elapsed>=0?elapsed/86400000+1:null;
+  const staffOrder=staffLow!==null&&staffHigh!==null&&staffLow>staffHigh;
+  if(staffOrder) byId('staff-high').setAttribute('aria-invalid','true');
+  const daily=days&&meals?meals/days:null;
+  const perBed=patientMeals&&beds&&daily!==null?daily/beds:null;
+  const perInpatientDay=inpatientDays&&meals?meals/inpatientDays:null;
+  const staffing=staffLow&&staffHigh&&!staffOrder&&meals?[meals/staffHigh,meals/staffLow]:null;
+  const display=[];
+  if(daily!==null) display.push(['平均每日供餐',format(daily)+' 餐／日']);
+  if(perBed!==null) display.push(['每床每日病人供餐',format(perBed)+' 餐／床／日']);
+  if(perInpatientDay!==null) display.push(['每住院人日供餐',format(perInpatientDay)+' 餐／住院人日']);
+  if(staffing) display.push(['同期供餐量按營養師人數換算',staffing.map(format).filter((x,i,a)=>i===0||x!==a[0]).join('–')+' 餐／人']);
+  const panel=byId('scale-results');
+  panel.replaceChildren();
+  panel.hidden=display.length===0;
+  for(const [label,value] of display){
+    const item=element('div'),dd=element('dd');
+    dd.append(element('strong',value));
+    item.append(element('dt',label),dd);
+    panel.append(item);
+  }
+  const notes=[];
+  if(invalid) notes.push('床數、人數與住院人日請輸入正整數。');
+  if(staffOrder) notes.push('營養師人數上限須大於或等於下限。');
+  if(!meals) notes.push('填入同期實際供餐份數後，即可換算服務量。');
+  else if(!days) notes.push('填入正確的開始及結束日期後，即可換算每日供餐量。');
+  if(beds&&!patientMeals) notes.push('每床及每住院人日指標適用於住院病人餐。');
+  byId('scale-status').textContent=notes.join(' ');
+  return {beds,staffLow,staffHigh,staffOrder,inpatientDays,days,daily,perBed,perInpatientDay,staffing};
+}
+function renderAnalysis(){
+  const selector=byId('scenario-category');
+  if(scenarioAuto&&last.validTotal&&last.total>0) selector.value=String(last.sums.indexOf(Math.max(...last.sums)));
+  const index=Number(selector.value),percent=Number(byId('scenario-percent').value);
+  const savings=last.sums[index]*(percent/100);
+  byId('action').textContent=last.validTotal?config[index].action:'有排放數據後，可選擇來源試算單項減量。';
+  byId('scenario-result').textContent=last.validTotal
+    ?'同期可少排 '+format(savings)+' 公斤 CO₂e'+(last.perMeal!==null?' · 每餐少排 '+format(savings/last.meals)+' 公斤 CO₂e':'')+'。'
+    :'填入有效的活動量與排放係數後顯示。';
+  const ref=byId('reference'),target=Number(ref.value);
+  const validReference=!ref.validity.badInput&&Number.isFinite(target)&&target>0;
+  ref.setAttribute('aria-invalid',String(ref.validity.badInput||(ref.value!==''&&!validReference)));
+  const validComparison=validReference&&last.perMeal!==null;
+  const percentDiff=validComparison?(last.perMeal-target)/target*100:null;
+  const gap=percentDiff===0?'與參考值相同。':(percentDiff>0?'高於':'低於')+'參考值'+(Number.isFinite(percentDiff)?'約 '+format(Math.abs(percentDiff))+'%':'')+'。';
+  byId('comparison-result').textContent=!validComparison
+    ?'填入有效的每餐試算及參考值後顯示。'
+    :last.incomplete||last.omitted?'初步對照（仍有未填或待補項目）。'+gap:gap;
+}
+for(const [i,group] of config.entries()){
+  const option=element('option',group.name);
+  option.value=String(i);
+  byId('scenario-category').append(option);
+}
+byId('scenario-category').value='0';
+byId('scenario-category').addEventListener('change',()=>{scenarioAuto=false;renderAnalysis()});
+byId('scenario-percent').addEventListener('change',renderAnalysis);
+byId('reference').addEventListener('input',renderAnalysis);
+byId('meals').addEventListener('input',calculate);
+for(const id of ['start','end']){
+  byId(id).addEventListener('input',()=>{
+    if(electricityPreset&&!isPowerYear()){
+      groups[1][0].factor='';
+      const power=rowViews.find(view=>view.row===groups[1][0]);
+      power.factor.value='';
+      electricityPreset=false;
+      message='日期已變更，請填入適用的電力係數。';
+    }
+    calculate();
+  });
+}
+function hasInputs(){
+  return ['start','end','meals','reference',...scaleIds].some(id=>byId(id).value||byId(id).validity.badInput)||
+    groups.some(group=>group.some(row=>row.amount||row.factor||row.custom||row.amountBad||row.factorBad));
+}
+byId('demo').addEventListener('click',()=>{
+  if(hasInputs()&&!confirm('載入示範會取代目前輸入，確定繼續？')) return;
+  groups=makeGroups();
+  groups.forEach((group,i)=>group.forEach((row,j)=>{
+    [row.amount,row.factor]=demoValues[i][j].map(String);
+  }));
+  byId('boundary').selectedIndex=0;
+  for(const id of scaleIds) byId(id).value='';
+  byId('start').value='2025-06-01';byId('end').value='2025-06-30';
+  byId('meals').value='5000';byId('reference').value='';
+  byId('scenario-percent').value='10';
+  scenarioAuto=true;demo=true;electricityPreset=true;message='';
+  render();
+});
+byId('clear').addEventListener('click',()=>{
+  if(hasInputs()&&!confirm('確定清空目前輸入？')) return;
+  groups=makeGroups();
+  for(const id of ['start','end','meals','reference',...scaleIds]) byId(id).value='';
+  byId('boundary').selectedIndex=0;byId('scenario-percent').value='10';byId('scenario-category').value='0';
+  scenarioAuto=true;demo=false;electricityPreset=false;message='';
+  render();
+});
+byId('boundary').addEventListener('change',calculate);
+for(const id of scaleIds) byId(id).addEventListener('input',calculate);
+byId('site-scale').addEventListener('click',()=>{
+  const preset={'inpatient-beds':'481','staff-low':'6','staff-high':'7'};
+  for(const [id,value] of Object.entries(preset)){
+    const input=byId(id);
+    if(input.value===''&&!input.validity.badInput) input.value=value;
+  }
+  calculate();
+});
+byId('method-link').addEventListener('click',()=>{byId('method').open=true});
+byId('export').addEventListener('click',()=>{
+  const scale=last.scale;
+  const lines=[
+    ['供膳範圍',byId('boundary').value],['開始日期',byId('start').value],['結束日期',byId('end').value],
+    ['資料性質',demo?'示範含假設係數':'已計入項目之試算'],
+    ...(electricityPreset?[['電力係數來源','經濟部能源署 2025 年公用售電業電力排碳係數']]:[]),
+    ['供餐份數',last.meals??''],['同期排放（kg CO₂e）',last.total],['每餐排放（kg CO₂e）',last.perMeal??''],
+    ['院區住院床數',scale.beds??''],['營養師人數下限',scale.staffOrder?'':scale.staffLow??''],
+    ['營養師人數上限',scale.staffOrder?'':scale.staffHigh??''],['同期住院人日',scale.inpatientDays??''],
+    ['盤查日數',scale.days??''],['平均每日供餐',scale.daily??''],['每床每日病人供餐',scale.perBed??''],
+    ['每住院人日供餐',scale.perInpatientDay??''],['每位營養師同期供餐換算下限',scale.staffing?.[0]??''],
+    ['每位營養師同期供餐換算上限',scale.staffing?.[1]??''],
+    ['已計入項目',last.count],['未填項目',last.omitted],['待補或無效項目',last.incomplete],[],
+    ['類別','項目','單位','活動量','係數（kg CO₂e／單位）','排放量（kg CO₂e）','狀態'],
+    ...last.rows.map(row=>[config[row.i].name,row.name,row.unit,row.amount,row.factor,row.value??'',row.status])
+  ];
+  const quote=value=>{
+    let text=String(value);
+    if(typeof value==='string'&&/^\s*[=+\-@\t\r\n]/.test(text)) text="'"+text;
+    return '"'+text.replaceAll('"','""')+'"';
+  };
+  const csv='\uFEFF'+lines.map(line=>line.map(quote).join(',')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  const link=element('a');
+  link.href=url;link.download='nutrition-carbon'+(byId('start').value?'-'+byId('start').value:'')+'.csv';
+  document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+render();
+</script>
+</body>
+</html>
