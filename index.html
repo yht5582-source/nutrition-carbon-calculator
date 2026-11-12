@@ -17,6 +17,13 @@ main{padding:23px 0 32px}.workspace{display:grid;grid-template-columns:minmax(0,
 .month-report{margin-bottom:12px;padding:9px 10px;background:#edf1e4;border-radius:7px}
 .month-report .total-row{padding:0;margin:0;border:0}
 .month-report p{font-size:12px;color:var(--muted);margin-top:4px}
+.totals .month-report .button{width:auto;margin-top:8px}
+.annual-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.annual-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.annual-grid label{font-size:12px;font-weight:750}
+.annual-total{margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.annual-total strong{font-size:20px;color:var(--leaf);overflow-wrap:anywhere}
+@media(max-width:620px){.annual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .scale-head{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .scale-results{display:grid;gap:6px;margin-top:11px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
 .scale-results div{background:#eff2e7;border-radius:7px;padding:7px 9px;font-size:12px}
@@ -75,14 +82,27 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <div class="month-report">
 <div class="total-row"><span id="month-label">月排放量</span><strong id="month-total" aria-live="polite">—</strong></div>
 <p id="month-note"></p>
+<button class="button" id="record-month" type="button" disabled>帶入年度彙總</button>
 </div>
 <h3>排放來源</h3><div class="bar" id="bar" aria-hidden="true"></div><div id="legend" class="legend"></div>
 <p class="note" id="status"></p><p class="note" id="coverage"></p>
 <button class="button" id="export" type="button" disabled>下載試算明細（CSV）</button>
+<a class="quick-link" href="#annual">查看年度彙總 ↓</a>
 <a class="quick-link" href="#scenario">查看減碳情境 ↓</a>
 </div>
 </aside>
 </div>
+<section class="card analysis" id="annual" aria-labelledby="annual-title">
+<div class="annual-head"><h2 id="annual-title">年度排放彙總</h2><button class="button" id="annual-export" type="button" disabled>下載年度明細（CSV）</button></div>
+<p class="note">每月填入同一供膳範圍的已計入排放量（公斤 CO₂e）。可直接填寫，或由完整單月試算帶入。空白為尚未填報。</p>
+<div class="scenario-controls">
+<label><span class="caption">彙總年度（西元）</span><input id="annual-year" type="number" min="1" max="9999" step="1" inputmode="numeric"></label>
+<label><span class="caption">供膳範圍</span><select id="annual-scope"></select></label>
+</div>
+<div class="annual-grid" id="annual-grid"></div>
+<div class="annual-total"><strong id="annual-total" aria-live="polite">—</strong><span id="annual-count"></span></div>
+<p class="note" id="annual-storage" role="status"></p>
+</section>
 <section class="card analysis" id="scenario" aria-label="比較及減量試算">
 <div class="analysis-grid">
 <section>
@@ -108,7 +128,7 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <details class="card method" id="method">
 <summary>計算方法、係數與資料範圍</summary>
 <p>同期排放為各項活動量乘以對應排放係數後的合計。每餐排放為同期排放除以實際供餐份數。所有係數的分母須與活動量單位一致。請留存來源、版本、地區及生命週期邊界。</p>
-<p>完整單月顯示該月已計入的排放。跨越數個完整曆月時，以同期總量除以月數。未涵蓋完整曆月時，依日均排放換算 30 天估計值。各月實際排放需使用各自的活動數據。</p>
+<p>完整單月顯示該月已計入的排放。跨越數個完整曆月時，以同期總量除以月數。未涵蓋完整曆月時，依日均排放換算 30 天估計值。各月實際排放需使用各自的活動數據。年度彙總會加總同一年度與供膳範圍的月排放，滿 12 個月時顯示全年總量。</p>
 <p>「一份實際供應的餐食」是本工具的計算單位。共用廚房、冷藏設備或洗滌的能源與用水，請依合理依據分攤。食材係數若已涵蓋配送或包裝，相關排放只計一次。廚餘列請使用處理階段的係數。</p>
 <p>可用台灣 2025 年公用售電業係數 0.467 kg CO₂e／kWh 試算廚房外購電力。正式生命週期盤查請選用與供電來源、年度及系統邊界相符的係數。</p>
 <ul>
@@ -116,7 +136,7 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <li><a href="https://data.moenv.gov.tw/dataset/detail/CFP_P_02" target="_blank" rel="noopener noreferrer">環境部碳足跡排放係數資料集</a></li>
 <li><a href="https://www.moeaea.gov.tw/ECW/PDA.aspx?kind=1&amp;news_id=34473" target="_blank" rel="noopener noreferrer">經濟部能源署 2025 年公用售電業電力排碳係數</a></li>
 </ul>
-<p>結果涵蓋已填報項目，供院內管理試算。資料在瀏覽器內計算，重新整理後清空；可下載 CSV 留存。</p>
+<p>結果涵蓋已填報項目，供院內管理試算。當次試算資料重新整理後會清空。年度月資料留存在目前瀏覽器，試算及年度明細均可下載 CSV 留存。</p>
 </details>
 </main>
 <script>
@@ -291,7 +311,7 @@ function assessMonth(total,start,end,days){
   const first=monthWindow(start.slice(0,7)),last=monthWindow(end.slice(0,7));
   if(first&&last&&start===first.start&&end===last.end){
     const months=last.serial-first.serial+1;
-    if(months===1) return {label:start.slice(0,7)+' 月排放',value:total,note:'完整單月的已計入排放。'};
+    if(months===1) return {label:start.slice(0,7)+' 月排放',code:start.slice(0,7),value:total,note:'完整單月的已計入排放。'};
     return {label:'每月平均排放',value:total===null?null:total/months,note:'同期總量 ÷ '+months+' 個完整曆月。'};
   }
   const value=total===null?null:total*(30/days);
@@ -337,6 +357,7 @@ function calculate(){
   byId('month-label').textContent=month.label;
   byId('month-total').textContent=month.value===null?'—':format(month.value)+' 公斤 CO₂e';
   byId('month-note').textContent=month.note;
+  byId('record-month').disabled=demo||!month.code||month.value===null;
   byId('status').textContent='已計入 '+count+' 項 · 未填 '+omitted+' 項'+(incomplete?' · 待補或無效 '+incomplete+' 項':'');
   byId('coverage').textContent=!Number.isFinite(total)?'合計超出計算範圍。':dateError?'結束日期須晚於或等於開始日期。':!validMeals?'填入實際供餐份數後可換算每餐。':'結果涵蓋已計入項目。空白項目未納入。';
   byId('context-message').textContent=[demo?'示範含假設係數，供操作練習。':'',message].filter(Boolean).join(' ');
@@ -507,6 +528,121 @@ byId('site-scale').addEventListener('click',()=>{
   calculate();
 });
 byId('method-link').addEventListener('click',()=>{byId('method').open=true});
+const annualKey='nutrition-carbon-monthly-v1:';
+const annualScopes=Array.from(byId('boundary').options,option=>option.value);
+const monthlyRecords=new Map();
+let canStoreAnnual=true;
+function annualContext(){
+  const input=byId('annual-year'),year=Number(input.value);
+  const scope=byId('annual-scope').value;
+  if(input.validity.badInput||!Number.isSafeInteger(year)||year<1||year>9999||!annualScopes.includes(scope)) return null;
+  return {year,scope,key:annualKey+JSON.stringify([year,scope])+':'};
+}
+function getAnnualValues(context){
+  if(!context) return Array(12).fill(null);
+  const fallback=monthlyRecords.get(context.key)??Array(12).fill(null);
+  if(!canStoreAnnual) return fallback;
+  try{
+    const values=Array.from({length:12},(_,i)=>{
+      const raw=localStorage.getItem(context.key+i),value=Number(raw);
+      return raw!==null&&Number.isFinite(value)&&value>=0?value:null;
+    });
+    monthlyRecords.set(context.key,values);
+    return values;
+  }catch{
+    canStoreAnnual=false;
+    return fallback;
+  }
+}
+function setAnnualValue(context,index,value){
+  const values=[...getAnnualValues(context)];
+  values[index]=value;
+  monthlyRecords.set(context.key,values);
+  if(canStoreAnnual){
+    try{
+      if(value===null) localStorage.removeItem(context.key+index);
+      else localStorage.setItem(context.key+index,String(value));
+    }catch{canStoreAnnual=false}
+  }
+  renderAnnualSummary();
+}
+function renderAnnualSummary(){
+  const context=annualContext(),values=getAnnualValues(context);
+  const filled=values.filter(value=>value!==null);
+  const total=filled.reduce((sum,value)=>sum+value,0);
+  byId('annual-total').textContent=!Number.isFinite(total)?'累計超出計算範圍':!filled.length?'—':
+    (filled.length===12?'全年排放量 ':'已填月份累計 ')+format(total)+' 公斤 CO₂e'+(filled.length===12?'（'+format(total/1000)+' 公噸）':'');
+  byId('annual-count').textContent=filled.length+'／12 個月已填';
+  byId('annual-export').disabled=!context||!filled.length||!Number.isFinite(total);
+  byId('annual-storage').textContent=canStoreAnnual
+    ?'月資料儲存在目前瀏覽器。清除瀏覽器資料前可先下載年度明細。'
+    :'目前無法持久儲存，月資料只會保留於本頁。請下載年度明細留存。';
+}
+const annualInputs=[];
+for(const scope of annualScopes) byId('annual-scope').append(element('option',scope));
+for(let index=0;index<12;index++){
+  const label=element('label'),input=element('input');
+  input.type='number';input.min='0';input.step='any';input.inputMode='decimal';input.placeholder='—';
+  label.append(element('span',(index+1)+' 月','caption'),input);
+  byId('annual-grid').append(label);
+  annualInputs.push(input);
+  input.addEventListener('input',()=>{
+    const context=annualContext(),number=Number(input.value);
+    const invalid=input.validity.badInput||(input.value!==''&&(!Number.isFinite(number)||number<0));
+    input.setAttribute('aria-invalid',String(invalid));
+    if(!context||invalid) return;
+    setAnnualValue(context,index,input.value===''?null:number);
+  });
+}
+function renderAnnualInputs(){
+  const context=annualContext(),values=getAnnualValues(context);
+  const year=byId('annual-year');
+  year.setAttribute('aria-invalid',String(!context&&Boolean(year.value||year.validity.badInput)));
+  annualInputs.forEach((input,i)=>{
+    input.value=values[i]??'';
+    input.disabled=!context;
+    input.setAttribute('aria-invalid','false');
+  });
+  renderAnnualSummary();
+}
+byId('annual-year').value=String(new Date().getFullYear());
+byId('annual-scope').value=byId('boundary').value;
+byId('annual-year').addEventListener('input',renderAnnualInputs);
+byId('annual-scope').addEventListener('change',renderAnnualInputs);
+byId('record-month').addEventListener('click',()=>{
+  if(demo||!last.month.code||last.month.value===null) return;
+  const [year,month]=last.month.code.split('-').map(Number);
+  const scope=byId('boundary').value,index=month-1;
+  const context={year,scope,key:annualKey+JSON.stringify([year,scope])+':'};
+  const existing=getAnnualValues(context)[index];
+  const notes=[];
+  if(last.omitted||last.incomplete) notes.push('本次試算仍有未填或待補項目，僅會帶入已計入的排放。');
+  if(existing!==null&&existing!==last.month.value) notes.push('同年度、範圍及月份已有資料，這次將取代原值。');
+  if(notes.length&&!confirm(notes.join(' ')+' 確定帶入？')) return;
+  byId('annual-year').value=String(year);
+  byId('annual-scope').value=scope;
+  setAnnualValue(context,index,last.month.value);
+  renderAnnualInputs();
+  annualInputs[index].focus();
+});
+byId('annual-export').addEventListener('click',()=>{
+  const context=annualContext();
+  if(!context) return;
+  const values=getAnnualValues(context),filled=values.filter(value=>value!==null);
+  const total=filled.reduce((sum,value)=>sum+value,0);
+  if(!filled.length||!Number.isFinite(total)) return;
+  downloadCsv([
+    ['年度',context.year],['供膳範圍',context.scope],['已填月數',filled.length],
+    [filled.length===12?'全年總排放（kg CO₂e）':'已填月份累計（kg CO₂e）',total],
+    ...(filled.length===12?[['全年總排放（t CO₂e）',total/1000]]:[]),[],
+    ['月份','排放（kg CO₂e）','狀態'],
+    ...values.map((value,index)=>[index+1,value??'',value===null?'未填':'已填'])
+  ],'nutrition-carbon-annual-'+context.year+'.csv');
+});
+window.addEventListener('storage',event=>{
+  if(canStoreAnnual&&(event.key===null||event.key.startsWith(annualKey))) renderAnnualInputs();
+});
+renderAnnualInputs();
 byId('export').addEventListener('click',()=>{
   const scale=last.scale;
   const lines=[
@@ -525,6 +661,9 @@ byId('export').addEventListener('click',()=>{
     ['類別','項目','單位','活動量','係數（kg CO₂e／單位）','排放量（kg CO₂e）','狀態'],
     ...last.rows.map(row=>[config[row.i].name,row.name,row.unit,row.amount,row.factor,row.value??'',row.status])
   ];
+  downloadCsv(lines,'nutrition-carbon'+(byId('start').value?'-'+byId('start').value:'')+'.csv');
+});
+function downloadCsv(lines,filename){
   const quote=value=>{
     let text=String(value);
     if(typeof value==='string'&&/^\s*[=+\-@\t\r\n]/.test(text)) text="'"+text;
@@ -533,10 +672,10 @@ byId('export').addEventListener('click',()=>{
   const csv='\uFEFF'+lines.map(line=>line.map(quote).join(',')).join('\r\n');
   const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
   const link=element('a');
-  link.href=url;link.download='nutrition-carbon'+(byId('start').value?'-'+byId('start').value:'')+'.csv';
+  link.href=url;link.download=filename;
   document.body.append(link);link.click();link.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
-});
+}
 render();
 </script>
 </body>
