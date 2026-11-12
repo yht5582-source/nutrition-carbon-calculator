@@ -11,6 +11,12 @@
 .shell{width:min(1220px,calc(100% - 64px));margin:auto}.top{border-bottom:1px solid #536852;color:#eff3e6}.top .shell{min-height:58px;display:flex;justify-content:space-between;align-items:center;gap:18px}.top a{color:inherit;font-size:13px}.brand{display:flex;gap:10px;align-items:center;font-weight:750}.mark{display:grid;place-items:center;border:1px solid #a4b490;border-radius:50%;width:31px;height:31px;font-size:11px;font-weight:650}
 header{background:var(--deep);color:#f5f6ed;border-bottom:5px solid var(--lime)}.hero{padding:35px 0 40px;display:flex;justify-content:space-between;align-items:end;gap:22px}.hero h1{font-size:clamp(32px,5vw,58px);line-height:1.15;letter-spacing:.02em}.hero p{margin-top:12px;color:#dce8d8}.buttons{display:flex;gap:8px;flex-wrap:wrap}.button{border:1px solid #bec6b5;background:#fffef9;border-radius:7px;padding:8px 12px;font-size:13px;font-weight:750;min-height:36px}.button:hover{background:#edf2e5}.button.primary{background:var(--lime);border-color:var(--lime);color:#243521}.button.primary:hover{background:#f0f7cd}.button.ghost{background:transparent;border-color:#9dad95;color:#fff}.button.ghost:hover{background:#3c5940}
 main{padding:23px 0 32px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(285px,335px);gap:20px;align-items:start}.forms{display:grid;gap:12px}.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius)}.meta{padding:16px 18px}.meta h2,.group h2,.summary h2,.analysis h2{font-size:16px}.meta p,.group p,.note{font-size:13px;color:var(--muted);margin-top:4px}.context{display:grid;grid-template-columns:1.1fr 1fr 1fr .95fr;gap:9px;margin-top:12px}.context label,.scenario-controls label{font-size:12px;font-weight:750}.caption{display:block;margin-bottom:4px}
+.month-control{display:flex;align-items:end;gap:8px;flex-wrap:wrap;margin-top:10px}
+.month-control label{font-size:12px;font-weight:750;max-width:200px}
+.month-control .button{min-height:39px}
+.month-report{margin-bottom:12px;padding:9px 10px;background:#edf1e4;border-radius:7px}
+.month-report .total-row{padding:0;margin:0;border:0}
+.month-report p{font-size:12px;color:var(--muted);margin-top:4px}
 .scale-head{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .scale-results{display:grid;gap:6px;margin-top:11px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
 .scale-results div{background:#eff2e7;border-radius:7px;padding:7px 9px;font-size:12px}
@@ -40,6 +46,11 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <label><span class="caption">結束日期</span><input id="end" type="date"></label>
 <label><span class="caption">供餐份數</span><input id="meals" type="number" min="1" step="1" inputmode="numeric" placeholder="例如 5000"></label>
 </div>
+<div class="month-control">
+<label><span class="caption">選擇盤查月份</span><input id="report-month" type="month" aria-describedby="month-help"></label>
+<button class="button" type="button" id="apply-month">帶入整月日期</button>
+</div>
+<p id="month-help">請填入所選期間的活動量。若要看各月排放，請分月填報與匯出。</p>
 <p id="context-message" role="status"></p>
 </div>
 <section class="card meta" aria-labelledby="scale-title">
@@ -61,6 +72,10 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <div class="headline"><h2>每餐已計入排放</h2><strong id="per-meal" class="metric" aria-live="polite">—</strong><small>公斤 CO₂e／餐</small></div>
 <div class="totals">
 <div class="total-row"><span>同期已計入總量</span><strong id="period-total">—</strong></div>
+<div class="month-report">
+<div class="total-row"><span id="month-label">月排放量</span><strong id="month-total" aria-live="polite">—</strong></div>
+<p id="month-note"></p>
+</div>
 <h3>排放來源</h3><div class="bar" id="bar" aria-hidden="true"></div><div id="legend" class="legend"></div>
 <p class="note" id="status"></p><p class="note" id="coverage"></p>
 <button class="button" id="export" type="button" disabled>下載試算明細（CSV）</button>
@@ -93,6 +108,7 @@ input,select{width:100%;min-width:0;background:#fff;border:1px solid #b9c3af;bor
 <details class="card method" id="method">
 <summary>計算方法、係數與資料範圍</summary>
 <p>同期排放為各項活動量乘以對應排放係數後的合計。每餐排放為同期排放除以實際供餐份數。所有係數的分母須與活動量單位一致。請留存來源、版本、地區及生命週期邊界。</p>
+<p>完整單月顯示該月已計入的排放。跨越數個完整曆月時，以同期總量除以月數。未涵蓋完整曆月時，依日均排放換算 30 天估計值。各月實際排放需使用各自的活動數據。</p>
 <p>「一份實際供應的餐食」是本工具的計算單位。共用廚房、冷藏設備或洗滌的能源與用水，請依合理依據分攤。食材係數若已涵蓋配送或包裝，相關排放只計一次。廚餘列請使用處理階段的係數。</p>
 <p>可用台灣 2025 年公用售電業係數 0.467 kg CO₂e／kWh 試算廚房外購電力。正式生命週期盤查請選用與供電來源、年度及系統邊界相符的係數。</p>
 <ul>
@@ -258,6 +274,33 @@ function isPowerYear(){
   const start=byId('start').value,end=byId('end').value;
   return start.startsWith('2025-')&&end.startsWith('2025-')&&start<=end;
 }
+function monthWindow(month){
+  if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return null;
+  const [year,index]=month.split('-').map(Number);
+  if(year===0) return null;
+  const leap=year%4===0&&(year%100!==0||year%400===0);
+  const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31][index-1];
+  return {start:month+'-01',end:month+'-'+days,serial:year*12+index};
+}
+function periodDays(start,end){
+  const elapsed=start&&end?Date.parse(end)-Date.parse(start):NaN;
+  return Number.isFinite(elapsed)&&elapsed>=0?elapsed/86400000+1:null;
+}
+function assessMonth(total,start,end,days){
+  if(!days) return {label:'月排放量',value:null,note:'請填入有效的盤查起訖日期。'};
+  const first=monthWindow(start.slice(0,7)),last=monthWindow(end.slice(0,7));
+  if(first&&last&&start===first.start&&end===last.end){
+    const months=last.serial-first.serial+1;
+    if(months===1) return {label:start.slice(0,7)+' 月排放',value:total,note:'完整單月的已計入排放。'};
+    return {label:'每月平均排放',value:total===null?null:total/months,note:'同期總量 ÷ '+months+' 個完整曆月。'};
+  }
+  const value=total===null?null:total*(30/days);
+  return {
+    label:'30 天排放估計',
+    value:Number.isFinite(value)?value:null,
+    note:'依 '+days+' 天的日均排放換算，假設活動維持同樣水準。'
+  };
+}
 function calculate(){
   const sums=config.map(()=>0),counts=config.map(()=>0);
   let omitted=0,incomplete=0;
@@ -281,7 +324,9 @@ function calculate(){
   const count=counts.reduce((a,b)=>a+b,0);
   const validTotal=count>0&&Number.isFinite(total);
   const start=byId('start').value,end=byId('end').value;
-  const dateError=Boolean(start&&end&&start>end);
+  const days=periodDays(start,end);
+  const dateError=Boolean(start&&end&&!days);
+  const month=assessMonth(validTotal?total:null,start,end,days);
   const mealsInput=byId('meals'),meals=Number(mealsInput.value);
   const validMeals=!mealsInput.validity.badInput&&Number.isSafeInteger(meals)&&meals>0;
   const perMeal=validTotal&&validMeals&&!dateError?total/meals:null;
@@ -289,6 +334,9 @@ function calculate(){
   mealsInput.setAttribute('aria-invalid',String(mealsInput.validity.badInput||(mealsInput.value!==''&&!validMeals)));
   byId('per-meal').textContent=perMeal===null?'—':format(perMeal);
   byId('period-total').textContent=validTotal?format(total)+' 公斤 CO₂e':'—';
+  byId('month-label').textContent=month.label;
+  byId('month-total').textContent=month.value===null?'—':format(month.value)+' 公斤 CO₂e';
+  byId('month-note').textContent=month.note;
   byId('status').textContent='已計入 '+count+' 項 · 未填 '+omitted+' 項'+(incomplete?' · 待補或無效 '+incomplete+' 項':'');
   byId('coverage').textContent=!Number.isFinite(total)?'合計超出計算範圍。':dateError?'結束日期須晚於或等於開始日期。':!validMeals?'填入實際供餐份數後可換算每餐。':'結果涵蓋已計入項目。空白項目未納入。';
   byId('context-message').textContent=[demo?'示範含假設係數，供操作練習。':'',message].filter(Boolean).join(' ');
@@ -309,11 +357,11 @@ function calculate(){
     segment.style.width=share+'%';
     bar.append(segment);
   });
-  last={rows,total,count,sums,validTotal,perMeal,meals:validMeals?meals:null,omitted,incomplete};
-  last.scale=renderScale(last.meals,start,end);
+  last={rows,total,count,sums,validTotal,perMeal,meals:validMeals?meals:null,omitted,incomplete,month};
+  last.scale=renderScale(last.meals,days);
   renderAnalysis();
 }
-function renderScale(meals,start,end){
+function renderScale(meals,days){
   const raw={};
   let invalid=false;
   for(const id of scaleIds){
@@ -327,8 +375,6 @@ function renderScale(meals,start,end){
   const patientMeals=byId('boundary').selectedIndex===0;
   const inpatientDays=patientMeals?raw['inpatient-days']:null;
   byId('inpatient-days-field').hidden=!patientMeals;
-  const elapsed=start&&end?Date.parse(end)-Date.parse(start):NaN;
-  const days=Number.isFinite(elapsed)&&elapsed>=0?elapsed/86400000+1:null;
   const staffOrder=staffLow!==null&&staffHigh!==null&&staffLow>staffHigh;
   if(staffOrder) byId('staff-high').setAttribute('aria-invalid','true');
   const daily=days&&meals?meals/days:null;
@@ -387,20 +433,43 @@ byId('scenario-category').addEventListener('change',()=>{scenarioAuto=false;rend
 byId('scenario-percent').addEventListener('change',renderAnalysis);
 byId('reference').addEventListener('input',renderAnalysis);
 byId('meals').addEventListener('input',calculate);
-for(const id of ['start','end']){
-  byId(id).addEventListener('input',()=>{
-    if(electricityPreset&&!isPowerYear()){
-      groups[1][0].factor='';
-      const power=rowViews.find(view=>view.row===groups[1][0]);
-      power.factor.value='';
-      electricityPreset=false;
-      message='日期已變更，請填入適用的電力係數。';
-    }
-    calculate();
-  });
+function updateDates(){
+  const start=byId('start').value,end=byId('end').value;
+  const month=monthWindow(start.slice(0,7));
+  const input=byId('report-month');
+  input.value=month&&month.start===start&&month.end===end?start.slice(0,7):'';
+  input.setAttribute('aria-invalid','false');
+  if(electricityPreset&&!isPowerYear()){
+    groups[1][0].factor='';
+    const power=rowViews.find(view=>view.row===groups[1][0]);
+    power.factor.value='';
+    electricityPreset=false;
+    message='日期已變更，請填入適用的電力係數。';
+  }
+  calculate();
 }
+for(const id of ['start','end']) byId(id).addEventListener('input',updateDates);
+byId('report-month').addEventListener('input',()=>{
+  byId('report-month').setAttribute('aria-invalid','false');
+  if(message==='請選擇有效月份。'){message='';calculate()}
+});
+byId('apply-month').addEventListener('click',()=>{
+  const input=byId('report-month');
+  const month=monthWindow(input.value);
+  if(!month){
+    input.setAttribute('aria-invalid','true');
+    message='請選擇有效月份。';
+    calculate();
+    input.focus();
+    return;
+  }
+  byId('start').value=month.start;
+  byId('end').value=month.end;
+  message='';
+  updateDates();
+});
 function hasInputs(){
-  return ['start','end','meals','reference',...scaleIds].some(id=>byId(id).value||byId(id).validity.badInput)||
+  return ['start','end','report-month','meals','reference',...scaleIds].some(id=>byId(id).value||byId(id).validity.badInput)||
     groups.some(group=>group.some(row=>row.amount||row.factor||row.custom||row.amountBad||row.factorBad));
 }
 byId('demo').addEventListener('click',()=>{
@@ -412,6 +481,7 @@ byId('demo').addEventListener('click',()=>{
   byId('boundary').selectedIndex=0;
   for(const id of scaleIds) byId(id).value='';
   byId('start').value='2025-06-01';byId('end').value='2025-06-30';
+  byId('report-month').value='2025-06';byId('report-month').setAttribute('aria-invalid','false');
   byId('meals').value='5000';byId('reference').value='';
   byId('scenario-percent').value='10';
   scenarioAuto=true;demo=true;electricityPreset=true;message='';
@@ -420,7 +490,8 @@ byId('demo').addEventListener('click',()=>{
 byId('clear').addEventListener('click',()=>{
   if(hasInputs()&&!confirm('確定清空目前輸入？')) return;
   groups=makeGroups();
-  for(const id of ['start','end','meals','reference',...scaleIds]) byId(id).value='';
+  for(const id of ['start','end','report-month','meals','reference',...scaleIds]) byId(id).value='';
+  byId('report-month').setAttribute('aria-invalid','false');
   byId('boundary').selectedIndex=0;byId('scenario-percent').value='10';byId('scenario-category').value='0';
   scenarioAuto=true;demo=false;electricityPreset=false;message='';
   render();
@@ -443,6 +514,8 @@ byId('export').addEventListener('click',()=>{
     ['資料性質',demo?'示範含假設係數':'已計入項目之試算'],
     ...(electricityPreset?[['電力係數來源','經濟部能源署 2025 年公用售電業電力排碳係數']]:[]),
     ['供餐份數',last.meals??''],['同期排放（kg CO₂e）',last.total],['每餐排放（kg CO₂e）',last.perMeal??''],
+    ['月排放類型',last.month.value===null?'':last.month.label],['月排放（kg CO₂e）',last.month.value??''],
+    ['月排放說明',last.month.note],
     ['院區住院床數',scale.beds??''],['營養師人數下限',scale.staffOrder?'':scale.staffLow??''],
     ['營養師人數上限',scale.staffOrder?'':scale.staffHigh??''],['同期住院人日',scale.inpatientDays??''],
     ['盤查日數',scale.days??''],['平均每日供餐',scale.daily??''],['每床每日病人供餐',scale.perBed??''],
